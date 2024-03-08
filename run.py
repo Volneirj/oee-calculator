@@ -15,9 +15,10 @@ SHEET = GSPREAD_CLIENT.open('oee_calculator')
 
 def get_daily_overall_data():
     """
-    Get daily overall data
+    Get daily report data verifying 
+    in every input if it is correct
     """
-    print("Please enter the daily overall data.")
+    print("Please enter the daily report data.")
     overall_data=[]
     date = get_valid_date_input("Enter the date of your data input (dd/mm/yyyy): ")
     overall_data.append(date)
@@ -42,6 +43,7 @@ def get_daily_overall_data():
     print(data_dict)
     ask_yes_no_question("Are the information given correct?", overall_data, get_daily_overall_data)
 
+    return overall_data
 
 def ask_yes_no_question(question, data, function):
     response = input(question + " (yes/no): ").lower()
@@ -52,14 +54,15 @@ def ask_yes_no_question(question, data, function):
         function()
     else:
         print("Invalid response. Please enter 'yes' or 'no'.")
-        return ask_yes_no_question(question)
+        return ask_yes_no_question(question, data, function)
 
 def get_valid_date_input(prompt):
     while True:
         try:
             date_str = input(prompt)
-            date_obj = datetime.strptime(date_str, "%d/%m/%Y")
-            return date_obj.strftime("%d/%m/%Y")
+            date_obj = datetime.strptime(date_str, '%d/%m/%Y')
+            formatted_date = date_obj.strftime('%d/%m/%Y')
+            return formatted_date
         except ValueError:
             print("Invalid date format. Please use dd/mm/yyyy.")
 
@@ -67,7 +70,7 @@ def get_valid_string_input(prompt):
     while True:
         value = input(prompt)
         if value.isalpha():
-            return value
+            return value.upper()
         else:
             print("Invalid input. Please enter letters only.")
 
@@ -79,4 +82,22 @@ def get_valid_integer_input(prompt):
         else:
             print("Invalid input. Please enter a valid integer.")
 
-get_daily_overall_data()
+def update_worksheet(data,worksheet):
+    """
+    Update worksheet, add new row with the report data provided
+    """
+    print(f"Updating {worksheet} worksheet...\n")
+    sheet = SHEET.worksheet(worksheet)
+    sheet.append_row(data)
+    print(f"Report {worksheet} updated sucessfully \n")
+
+
+def main():
+    """
+    Main function
+    """
+    data = get_daily_overall_data()
+    update_worksheet(data, "report")
+
+
+main()
