@@ -1,7 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
 from datetime import datetime
-import openpyx1
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -71,7 +70,7 @@ def get_daily_data():
     daily_data.append(meal_breaks)
     downtime = get_valid_integer_input("Please add machine down time (minutes): ")
     daily_data.append(downtime)
-    ideal_run = get_valid_integer_input("Please ideal run rate (part per minutes): ")
+    ideal_run = get_valid_integer_input("Please ideal run rate (parts per minute): ")
     daily_data.append(ideal_run)
     total_pieces = get_valid_integer_input("Please add the total pieces processed: ")
     daily_data.append(total_pieces)
@@ -91,22 +90,22 @@ def update_worksheet(data,worksheet):
     print(f"Updating {worksheet} worksheet...\n")
     sheet = SHEET.worksheet(worksheet)
     sheet.append_row(data)
-    print(f"Report {worksheet} updated sucessfully \n")
+    print(f"Worksheet {worksheet} updated sucessfully \n")
 
 def calculate_variables(data):
     """
     Calculate the variables planned production time, 
-    operating time and good pieces based on daily data.
+    operating time and good pieces based on daily data.    
     """
     variables = []
         
     date = data[0]
     variables.append(date)
     
-    planned_pro_time = int(data[3]) - int(data[4]) - int(data[5])
-    variables.append(planned_pro_time)
+    planned_prod_time = int(data[2]) - int(data[3]) - int(data[4])
+    variables.append(planned_prod_time)
     
-    operating_time = planned_pro_time - int(data[6])
+    operating_time = planned_prod_time - int(data[5])
     variables.append(operating_time)
     
     good_pieces = int(data[7]) - int(data[8])
@@ -114,6 +113,32 @@ def calculate_variables(data):
     
     return variables
 
+def calculate_oee(variables, data):
+    """
+    Calculate availability, performance, quality and Overal OEE based on calulated
+    variables and the daily data supplied.
+
+    variables = variables result list
+    data = report list
+    """
+    oee_factor = []
+
+    date = data[0]
+    oee_factor.append(date)
+
+    availability = (int(variables[2])/int(variables[1]))
+    oee_factor.append(availability)
+
+    performance = ((int(data[7])/int(variables[2]))/data[6])
+    oee_factor.append(performance)
+    
+    quality = (int(variables[3])/int(data[7]))
+    oee_factor.append(quality)
+ 
+    overall_oee = availability * performance * quality
+    oee_factor.append(overall_oee)
+ 
+    return oee_factor   
 
 def main():
     """
@@ -121,7 +146,9 @@ def main():
     """
     day_data = get_daily_data()
     update_worksheet(day_data, "report")
-    variables = calculate_variables()
-    update_worksheet(variables, "variables")
-    
+    day_variables = calculate_variables(day_data)
+    update_worksheet(day_variables, "variables")
+    day_oee = calculate_oee(day_variables, day_data)
+    update_worksheet(day_oee, "oee_factor")
+
 main()
