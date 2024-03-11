@@ -145,12 +145,20 @@ def main():
     Run all program functions
     """
     day_data = get_daily_data()
+
     update_worksheet(day_data, "report")
+
     day_variables = calculate_variables(day_data)
-    print(day_variables)
+
     update_worksheet(day_variables, "variables")
+
     day_oee = calculate_oee(day_variables, day_data)
+
     update_worksheet(day_oee, "oee_factor")
-    print(f'The production today {day_data[0]} with the supervision of {day_data[1]} reach the availability of : {day_oee[1]*100}%, performance {day_oee[2]*100}% and quality {day_oee[3]*100}%. In general the Overall OEE (Overall Equipment Effectiveness) reach {day_oee[4]*100}%.')
+
+    print(f'The production today {day_data[0]} with the supervision of {day_data[1]} reached the availability of: '
+          f'{day_oee[1]*100:.2f}%, performance: {day_oee[2]*100:.2f}%, and quality: {day_oee[3]*100:.2f}%. '
+          f'In general, the Overall OEE (Overall Equipment Effectiveness) reached: {day_oee[4]*100:.2f}%.')
 
 main()
+
