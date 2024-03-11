@@ -127,16 +127,16 @@ def calculate_oee(variables, data):
     oee_factor.append(date)
 
     availability = (int(variables[2])/int(variables[1]))
-    oee_factor.append(availability)
+    oee_factor.append(round(availability,2))
 
     performance = ((int(data[7])/int(variables[2]))/data[6])
-    oee_factor.append(performance)
+    oee_factor.append(round(performance,2))
     
     quality = (int(variables[3])/int(data[7]))
-    oee_factor.append(quality)
+    oee_factor.append(round(quality,2))
  
     overall_oee = availability * performance * quality
-    oee_factor.append(overall_oee)
+    oee_factor.append(round(overall_oee,2))
  
     return oee_factor   
 
@@ -147,8 +147,10 @@ def main():
     day_data = get_daily_data()
     update_worksheet(day_data, "report")
     day_variables = calculate_variables(day_data)
+    print(day_variables)
     update_worksheet(day_variables, "variables")
     day_oee = calculate_oee(day_variables, day_data)
     update_worksheet(day_oee, "oee_factor")
+    print(f'The production today {day_data[0]} with the supervision of {day_data[1]} reach the availability of : {day_oee[1]*100}%, performance {day_oee[2]*100}% and quality {day_oee[3]*100}%. In general the Overall OEE (Overall Equipment Effectiveness) reach {day_oee[4]*100}%.')
 
 main()
