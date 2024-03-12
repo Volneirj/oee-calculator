@@ -14,6 +14,7 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('oee_calculator')
 
 def ask_yes_no_question(question, data, function):
+    
     response = input(question + " (yes/no): ").lower()
     if response == 'yes':
         return data
