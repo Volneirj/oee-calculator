@@ -17,12 +17,20 @@ SHEET = GSPREAD_CLIENT.open('oee_calculator')
 def ask_yes_no_question(question, data, function):
     response = input(question + " (yes/no): ").lower()
     if response == 'yes':
-        return data
+        if data is None:
+            print('Thank you for using OEE Calculator,'
+                  'this softawe has been developed by Volnei Resena Junior.\n'
+                  'This code can be found at'
+                  ' https://github.com/Volneirj/oee-calculator\n')
+            print("Exiting the program.")
+            raise SystemExit
+        else:
+            return data
     elif response == 'no':
-        print("The data collection will be restarted")
+        print("\nThe data collection will be restarted\n")
         function()
     else:
-        print("Invalid response. Please enter 'yes' or 'no'.")
+        print("\nInvalid response. Please enter 'yes' or 'no'.")
         return ask_yes_no_question(question, data, function)
 
 
