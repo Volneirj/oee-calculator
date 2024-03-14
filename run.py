@@ -18,8 +18,8 @@ def ask_yes_no_question(question, data, function):
     response = input(question + " (yes/no): ").lower()
     if response == 'yes':
         if data is None:
-            print('Thank you for using OEE Calculator,'
-                  'this softawe has been developed by Volnei Resena Junior.\n'
+            print('\nThank you for using OEE Calculator\n'
+                  'This softawe has been developed by Volnei Resena Junior.\n'
                   'This code can be found at'
                   ' https://github.com/Volneirj/oee-calculator\n')
             print("Exiting the program.")
@@ -179,14 +179,14 @@ def main():
     update_worksheet(day_oee, "oee_factor")
 
     print(f'The production from {day_data[0]} with the supervision of '
-          f'{day_data[1]} reached:\nAvailability:'
+          f'{day_data[1]} reached:\n\nAvailability:'
           f'{day_oee[1]*100:.2f}%\nPerformance: {day_oee[2]*100:.2f}%\n'
           f'Quality: {day_oee[3]*100:.2f}%\n\n'
           f'Overall OEE (Overall Equipment Effectiveness)'
-          f': {day_oee[4]*100:.2f}%.\n\n')
+          f': {day_oee[4]*100:.2f}%.\n')
     
     ask_yes_no_question(
-        "Have you finished you daily report?", None, main
+        "Have you finished your daily report?", None, main
     )
 
 main()
