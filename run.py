@@ -184,5 +184,9 @@ def main():
           f'Quality: {day_oee[3]*100:.2f}%\n\n'
           f'Overall OEE (Overall Equipment Effectiveness)'
           f': {day_oee[4]*100:.2f}%.\n\n')
+    
+    ask_yes_no_question(
+        "Have you finished you daily report?", None, main
+    )
 
 main()
