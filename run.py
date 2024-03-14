@@ -48,10 +48,12 @@ def get_valid_date_input(prompt):
 def get_valid_string_input(prompt):
     while True:
         value = input(prompt)
-        if value.isalpha():
+        if value.replace(" ", "").isalpha() and len(value) >= 3:
             return value.upper()
         else:
-            print("Invalid input. Please enter letters only.")
+            print('Invalid input.'
+                  'The name must contain 3 or more letters.\n'
+                  'Please enter letters only.')
 
 
 def get_valid_integer_input(prompt):
