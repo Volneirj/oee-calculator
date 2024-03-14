@@ -178,12 +178,11 @@ def main():
 
     update_worksheet(day_oee, "oee_factor")
 
-    print(f'The production today {day_data[0]} with the supervision of'
-          f'{day_data[1]} reached the availability of:'
-          f'{day_oee[1]*100:.2f}%, performance: {day_oee[2]*100:.2f}%,'
-          f'and quality: {day_oee[3]*100:.2f}%.'
-          f'In general, the Overall OEE (Overall Equipment Effectiveness)'
-          f' reached: {day_oee[4]*100:.2f}%.')'
-
+    print(f'The production from {day_data[0]} with the supervision of '
+          f'{day_data[1]} reached:\nAvailability:'
+          f'{day_oee[1]*100:.2f}%\nPerformance: {day_oee[2]*100:.2f}%\n'
+          f'Quality: {day_oee[3]*100:.2f}%\n\n'
+          f'Overall OEE (Overall Equipment Effectiveness)'
+          f': {day_oee[4]*100:.2f}%.\n\n')
 
 main()
