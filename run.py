@@ -225,7 +225,7 @@ def add_new_report():
     oee_results(day_report,day_oee)
 
 
-def print_report(worksheet,header, filter_date=None):
+def print_report(worksheet, header, filter_date=None):
     """
     Using the API, connect to the Google Sheet and 
     retrieve all data from the specified worksheet, then print it.
@@ -237,18 +237,20 @@ def print_report(worksheet,header, filter_date=None):
     data = report.get_all_values()
 
     if filter_date:
-        data = [row for row in data if row[0] == filter_date]
-
-    if not data:    
-        return None
+        filtered_data = [row for row in data if row[0] == filter_date]
+        if not filtered_data:
+            print("No data available.")
+            return None
+        else:
+            data = filtered_data
 
     column_widths = [max(len(str(cell)) for cell in column) for column in zip(*data)]
-
     print("|".join(cell.ljust(width) for cell, width in zip(data[0], column_widths)))
-    print("-" * (sum(column_widths)+8))
+    print("-" * (sum(column_widths) + 8))
 
     for row in data[1:]:
         print("|".join(cell.ljust(width) for cell, width in zip(row, column_widths)))
+
 
 
 def get_data_worksheet(worksheet):
@@ -300,17 +302,13 @@ def validate_data(data):
     return converted_data
 
 
-def print_oee_date():
+def oee_by_date():
     """
     Retrieves data for the selected date and prints OEE.
     """
     print("OEE calculation by date")
     
     selected_date = get_valid_date_input("Date (dd/mm/yyyy): ")
-    
-    if selected_date:
-        header = '\nShowing report with selected date\n'
-        data_printed = print_report('report', header , selected_date)
 
     report_data = get_data_worksheet('report')
     oee_factor_data = get_data_worksheet('oee_factor')
@@ -324,7 +322,7 @@ def print_oee_date():
     if report_int and oee_int:
         oee_results(report_int[0],oee_int[0])
     else:
-        print(f'No data Available for {selected_date}')
+        print(f'\nNo data Available for {selected_date}')
 
 def main():
     """
@@ -340,7 +338,7 @@ def main():
         elif choice == '2':
             print_report('report', "\nShowing all reports\n")
         elif choice == '3':
-            print_oee_date()
+            oee_by_date()
         elif choice == '4':
             print('\nThank you for using OEE Calculator\n'
                   'This software has been developed by Volnei Resena Junior.\n'
