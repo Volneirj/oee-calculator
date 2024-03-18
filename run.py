@@ -16,12 +16,23 @@ SHEET = GSPREAD_CLIENT.open('oee_calculator')
 
 class YesNoQuestion:
     def __init__(self, question, data, function):
+        """
+        Parameters:
+        - question (str): The question to ask the user.
+        - data (any): Associated data to return if the
+        user responds with 'yes'.
+        - function (function): The function to call
+        if the user responds with 'no'.
+        """
         self.question = question
         self.data = data
         self.function = function
 
     def ask_question(self):
+        """
+        Ask the user a yes/no question and handle the response.
         response = input(self.question + " (yes/no): ").lower()
+        """
         if response == 'yes':
             if self.data is None:
                 print('No data found')
@@ -35,14 +46,14 @@ class YesNoQuestion:
             return self.ask_question()
 
 
-def get_valid_date_input(prompt):
+def get_date_input_wfilter(prompt):
     """
-    Check if the data input is a date
-    Also show the user the data format expected
+    Check if the data is a date,
+    Using the filter_data compare if the date already exists
     """
     error_message = (f'Data for this date already exists.\n'
                      f'Please choose a different date or'
-                     f'delete it on the main menu.')
+                     f' delete it on worksheet.')
     while True:
         try:
             date_str = input(prompt)
@@ -59,6 +70,19 @@ def get_valid_date_input(prompt):
             else:
                 print(e)
 
+def get_valid_date_input(prompt):
+    """
+    Check if the data input is a date
+    Also show the user the data format expected
+    """
+    while True:
+        try:
+            date_str = input(prompt)
+            date_obj = datetime.strptime(date_str, '%d/%m/%Y')
+            formatted_date = date_obj.strftime('%d/%m/%Y')
+            return formatted_date
+        except ValueError:
+            print("Invalid date format. Please use dd/mm/yyyy.")
 
 def get_valid_string_input(prompt):
     """
@@ -94,7 +118,7 @@ def get_daily_data():
     """
     print("\nPlease enter the daily report data.\n")
     daily_data = []
-    date = get_valid_date_input("Date (dd/mm/yyyy): ")
+    date = get_date_input_wfilter("Date (dd/mm/yyyy): ")
     daily_data.append(date)
     supervisor = get_valid_string_input("Supervisor Name: ")
     daily_data.append(supervisor)
