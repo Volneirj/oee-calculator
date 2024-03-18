@@ -168,6 +168,17 @@ def calculate_oee(variables, data):
 
     return oee_factor
 
+def oee_results(report,oee_factor):
+    """
+    Print daily results based on daily reports and oee calculated
+    """
+    print(f'\nThe production from {report[0]} with the supervision of '
+          f'{report[1]} reached:\n\nAvailability:'
+          f'{oee_factor[1]*100:.2f}%\nPerformance: {oee_factor[2]*100:.2f}%\n'
+          f'Quality: {oee_factor[3]*100:.2f}%\n\n'
+          f'Overall OEE (Overall Equipment Effectiveness)'
+          f': {oee_factor[4]*100:.2f}%.\n')
+
 def display_menu():
     """
     Print main menu with the available Options
@@ -183,24 +194,19 @@ def add_new_report():
     Collect the input data, import it to googlesheets
     calculate the oee factor based on data and variables.
     """
-    day_data = get_daily_data()
+    day_report = get_daily_data()
 
-    update_worksheet(day_data, "report")
+    update_worksheet(day_report, "report")
 
-    day_variables = calculate_variables(day_data)
+    day_variables = calculate_variables(day_report)
 
     update_worksheet(day_variables, "variables")
 
-    day_oee = calculate_oee(day_variables, day_data)
+    day_oee = calculate_oee(day_variables, day_report)
 
     update_worksheet(day_oee, "oee_factor")
 
-    print(f'The production from {day_data[0]} with the supervision of '
-          f'{day_data[1]} reached:\n\nAvailability:'
-          f'{day_oee[1]*100:.2f}%\nPerformance: {day_oee[2]*100:.2f}%\n'
-          f'Quality: {day_oee[3]*100:.2f}%\n\n'
-          f'Overall OEE (Overall Equipment Effectiveness)'
-          f': {day_oee[4]*100:.2f}%.\n')
+    oee_results(day_report,day_oee)
 
 def show_all_reports():
     """
@@ -215,13 +221,30 @@ def show_all_reports():
     column_widths = [max(len(str(cell)) for cell in column) for column in zip(*data)]
 
     print("|".join(cell.ljust(width) for cell, width in zip(data[0], column_widths)))
-    print("-" * sum(column_widths))  # Print separator
+    print("-" * (sum(column_widths)+8))
 
     for row in data[1:]:
         print("|".join(cell.ljust(width) for cell, width in zip(row, column_widths)))
 
-show_all_reports()
 
+def get_data_worksheet(name, data):
+    name = SHEET.worksheet(data).get_all_values()
+
+    return name
+
+def filter_data(data):
+    
+    filtered_data = [row for row in data if row[0] == selected_date]   
+
+    if filtered_data:
+        # Print the filtered data
+        print("\nData for date:", selected_date)
+        print("-" * 70)
+        for row in filtered_data:
+            formatted_row = [cell.ljust(20) for cell in row]
+            print("|".join(formatted_row))
+    else:
+        print("No data available for the selected date.")
 
 def print_OEE_date():
     """
@@ -229,6 +252,16 @@ def print_OEE_date():
     get OEE from selected date
     """
     print("OEE calculation by date")
+
+    selected_date = input("Enter the date (dd/mm/yyyy): ")
+
+    get_data_worksheet(report, 'report')
+    get_data_worksheet(oee_factor, 'oee')
+
+    filter_data(report)
+    filter_data(oee_factor)
+
+    oee_results(report,oee_factor)
 
 
 def main():
@@ -247,6 +280,10 @@ def main():
         elif choice == '3':
             print_OEE_date()
         elif choice == '4':
+            print('\nThank you for using OEE Calculator\n'
+                  'This software has been developed by Volnei Resena Junior.\n'
+                  'This code can be found at'
+                  ' https://github.com/Volneirj/oee-calculator\n')            
             print("Exiting the program.")
             break
         else:
