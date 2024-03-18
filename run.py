@@ -40,7 +40,9 @@ def get_valid_date_input(prompt):
     Check if the data input is a date
     Also show the user the data format expected
     """
-    error_message = 'Data for this date already exists. Please choose a different date or delete it on the main menu.'
+    error_message = (f'Data for this date already exists.\n'
+                     f'Please choose a different date or'
+                     f'delete it on the main menu.')
     while True:
         try:
             date_str = input(prompt)
@@ -51,7 +53,7 @@ def get_valid_date_input(prompt):
             if filtered_data and filtered_data[0][0] == formatted_date:
                 raise ValueError(error_message)
             return formatted_date
-        except ValueError as e:            
+        except ValueError as e:
             if str(e) != error_message:
                 print("Invalid date format. Please use dd/mm/yyyy.")
             else:
@@ -60,7 +62,7 @@ def get_valid_date_input(prompt):
 
 def get_valid_string_input(prompt):
     """
-    Check if the input is only string, has not only spaces, len >= 3, and 
+    Check if the input is only string, has not only spaces, len >= 3, and
     return it uppercase, show what could be wront to the user
     """
     while True:
@@ -116,7 +118,7 @@ def get_daily_data():
     data_dict = dict(zip(headers, daily_data))
     print(data_dict)
     is_the_data_correct = YesNoQuestion("Are the information given correct?",
-    daily_data, get_daily_data)
+                                        daily_data, get_daily_data)
     is_the_data_correct.ask_question()
 
     return daily_data
@@ -210,7 +212,7 @@ def add_new_report():
     """
     Collect the input data, import it to googlesheets
     calculate the oee factor based on data and variables.
-    """    
+    """
     day_report = get_daily_data()
 
     update_worksheet(day_report, "report")
@@ -223,17 +225,17 @@ def add_new_report():
 
     update_worksheet(day_oee, "oee_factor")
 
-    oee_results(day_report,day_oee)
+    oee_results(day_report, day_oee)
 
 
 def print_report(worksheet, header, filter_date=None):
     """
-    Using the API, connect to the Google Sheet and 
+    Using the API, connect to the Google Sheet and
     retrieve all data from the specified worksheet, then print it.
     Optionally, filter the data by date before printing.
     """
     print(header)
-    
+
     report = SHEET.worksheet(worksheet)
     data = report.get_all_values()
 
@@ -245,13 +247,15 @@ def print_report(worksheet, header, filter_date=None):
         else:
             data = filtered_data
 
-    column_widths = [max(len(str(cell)) for cell in column) for column in zip(*data)]
-    print("|".join(cell.ljust(width) for cell, width in zip(data[0], column_widths)))
+    column_widths = [max(len(str(cell)) for cell in column)
+                     for column in zip(*data)]
+    print("|".join(cell.ljust(width) for cell,
+                   width in zip(data[0], column_widths)))
     print("-" * (sum(column_widths) + 8))
 
     for row in data[1:]:
-        print("|".join(cell.ljust(width) for cell, width in zip(row, column_widths)))
-
+        print("|".join(cell.ljust(width) for cell,
+              width in zip(row, column_widths)))
 
 
 def get_data_worksheet(worksheet):
@@ -282,10 +286,10 @@ def validate_data(data):
         for cell in row:
             try:
                 converted_cell = int(cell)
-            except ValueError:               
+            except ValueError:
                 try:
                     converted_cell = float(cell.replace(',', '.'))
-                except ValueError:                    
+                except ValueError:
                     converted_cell = cell
             converted_row.append(converted_cell)
         converted_data.append(converted_row)
@@ -298,7 +302,7 @@ def oee_by_date():
     Retrieves data for the selected date and prints OEE.
     """
     print("OEE calculation by date")
-    
+
     selected_date = get_valid_date_input("Date (dd/mm/yyyy): ")
 
     report_data = get_data_worksheet('report')
@@ -311,9 +315,10 @@ def oee_by_date():
     oee_int = validate_data(filtered_oee_factor)
 
     if report_int and oee_int:
-        oee_results(report_int[0],oee_int[0])
+        oee_results(report_int[0], oee_int[0])
     else:
         print(f'\nNo data Available for {selected_date}')
+
 
 def main():
     """
@@ -334,10 +339,11 @@ def main():
             print('\nThank you for using OEE Calculator\n'
                   'This software has been developed by Volnei Resena Junior.\n'
                   'This code can be found at'
-                  ' https://github.com/Volneirj/oee-calculator\n')            
+                  ' https://github.com/Volneirj/oee-calculator\n')
             print("Exiting the program.")
             break
         else:
             print("Invalid choice. Please enter a number from 1 to 4.")
-    
+
+
 main()
