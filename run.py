@@ -14,24 +14,30 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('oee_calculator')
 
 
-def ask_yes_no_question(question, data, function):
-    response = input(question + " (yes/no): ").lower()
-    if response == 'yes':
-        if data is None:
-            print('\nThank you for using OEE Calculator\n'
-                  'This softawe has been developed by Volnei Resena Junior.\n'
-                  'This code can be found at'
-                  ' https://github.com/Volneirj/oee-calculator\n')
-            print("Exiting the program.")
-            raise SystemExit
+class YesNoQuestion:
+    def __init__(self, question, data, function):
+        self.question = question
+        self.data = data
+        self.function = function
+
+    def ask_question(self):
+        response = input(self.question + " (yes/no): ").lower()
+        if response == 'yes':
+            if self.data is None:
+                print('\nThank you for using OEE Calculator\n'
+                      'This software has been developed by Volnei Resena Junior.\n'
+                      'This code can be found at'
+                      ' https://github.com/Volneirj/oee-calculator\n')
+                print("Exiting the program.")
+                raise SystemExit
+            else:
+                return self.data
+        elif response == 'no':
+            print("\nThe data collection will be restarted\n")
+            self.function()
         else:
-            return data
-    elif response == 'no':
-        print("\nThe data collection will be restarted\n")
-        function()
-    else:
-        print("\nInvalid response. Please enter 'yes' or 'no'.")
-        return ask_yes_no_question(question, data, function)
+            print("\nInvalid response. Please enter 'yes' or 'no'.")
+            return self.ask_question()
 
 
 def get_valid_date_input(prompt):
@@ -95,9 +101,10 @@ def get_daily_data():
                'Ideal Run Rate', 'Total Pieces', 'Reject Pieces']
     data_dict = dict(zip(headers, daily_data))
     print(data_dict)
-    ask_yes_no_question(
-        "Are the information given correct?", daily_data, get_daily_data
-    )
+    is_the_data_correct = YesNoQuestion("Are the information given correct?",
+    daily_data, get_daily_data)
+    is_the_data_correct.ask_question()
+
     return daily_data
 
 
@@ -161,10 +168,20 @@ def calculate_oee(variables, data):
 
     return oee_factor
 
-
-def main():
+def display_menu():
     """
-    Run all program functions
+    Print main menu with the available Options
+    """
+    print("Main Menu")
+    print("1. Add new report")
+    print("2. Show all reports")
+    print("3. See OEE by date")
+    print("4. Exit")
+
+def add_new_report():
+    """
+    Collect the input data, import it to googlesheets
+    calculate the oee factor based on data and variables.
     """
     day_data = get_daily_data()
 
@@ -184,9 +201,55 @@ def main():
           f'Quality: {day_oee[3]*100:.2f}%\n\n'
           f'Overall OEE (Overall Equipment Effectiveness)'
           f': {day_oee[4]*100:.2f}%.\n')
-    
-    ask_yes_no_question(
-        "Have you finished your daily report?", None, main
-    )
 
+def show_all_reports():
+    """
+    Using the API, connect to the Google Sheet and 
+    retrieve all data from the "report" sheet, then print it.
+    """
+    print("Showing all reports:\n")
+    
+    report = SHEET.worksheet('report')
+    data = report.get_all_values()
+
+    column_widths = [max(len(str(cell)) for cell in column) for column in zip(*data)]
+
+    print("|".join(cell.ljust(width) for cell, width in zip(data[0], column_widths)))
+    print("-" * sum(column_widths))  # Print separator
+
+    for row in data[1:]:
+        print("|".join(cell.ljust(width) for cell, width in zip(row, column_widths)))
+
+show_all_reports()
+
+
+def print_OEE_date():
+    """
+    Using the api connect to the googlesheet and 
+    get OEE from selected date
+    """
+    print("OEE calculation by date")
+
+
+def main():
+    """
+    Display the menu where the user can select between
+    the options available
+    """
+    while True:
+        display_menu()
+        choice = input("Please select an option: ")
+
+        if choice == '1':
+            add_new_report()
+        elif choice == '2':
+            show_all_reports()
+        elif choice == '3':
+            print_OEE_date()
+        elif choice == '4':
+            print("Exiting the program.")
+            break
+        else:
+            print("Invalid choice. Please enter a number from 1 to 4.")
+    
 main()
