@@ -168,7 +168,7 @@ def calculate_oee(variables, data):
 
     return oee_factor
 
-def oee_results(report,oee_factor):
+def oee_results(report, oee_factor):
     """
     Print daily results based on daily reports and oee calculated
     """
@@ -183,11 +183,11 @@ def display_menu():
     """
     Print main menu with the available Options
     """
-    print("Main Menu")
+    print("\nMain Menu\n")
     print("1. Add new report")
     print("2. Show all reports")
     print("3. See OEE by date")
-    print("4. Exit")
+    print("4. Exit\n")
 
 def add_new_report():
     """
@@ -208,15 +208,23 @@ def add_new_report():
 
     oee_results(day_report,day_oee)
 
-def show_all_reports():
+def print_report(worksheet,header, filter_date=None):
     """
     Using the API, connect to the Google Sheet and 
-    retrieve all data from the "report" sheet, then print it.
+    retrieve all data from the specified worksheet, then print it.
+    Optionally, filter the data by date before printing.
     """
-    print("Showing all reports:\n")
+    print(header)
     
-    report = SHEET.worksheet('report')
+    report = SHEET.worksheet(worksheet)
     data = report.get_all_values()
+
+    if filter_date:
+        data = [row for row in data if row[0] == filter_date]
+
+    if not data:
+        print("No data available.")
+        return
 
     column_widths = [max(len(str(cell)) for cell in column) for column in zip(*data)]
 
@@ -226,43 +234,69 @@ def show_all_reports():
     for row in data[1:]:
         print("|".join(cell.ljust(width) for cell, width in zip(row, column_widths)))
 
+def get_data_worksheet(worksheet):
+    """
+    Fetches data from the specified worksheet in Google Sheets.
+    """
+    data = SHEET.worksheet(worksheet)
+    return data.get_all_values()
 
-def get_data_worksheet(name, data):
-    name = SHEET.worksheet(data).get_all_values()
+def filter_data(data, selected_date):
+    """
+    Filters the data based on the selected date.
+    """
+    filtered_data = [row for row in data if row[0] == selected_date]
+    return filtered_data
 
-    return name
-
-def filter_data(data):
-    
-    filtered_data = [row for row in data if row[0] == selected_date]   
-
+def print_filtered_data(filtered_data, selected_date):
+    """
+    Prints the filtered data in a formatted table.
+    """
     if filtered_data:
-        # Print the filtered data
         print("\nData for date:", selected_date)
-        print("-" * 70)
-        for row in filtered_data:
-            formatted_row = [cell.ljust(20) for cell in row]
-            print("|".join(formatted_row))
     else:
         print("No data available for the selected date.")
 
-def print_OEE_date():
+def validate_data(data):
     """
-    Using the api connect to the googlesheet and 
-    get OEE from selected date
+    Converts numeric strings in the data list to integers or floats.
+    """
+    converted_data = []
+    for row in data:
+        converted_row = []
+        for cell in row:
+            try:
+                converted_cell = int(cell)
+            except ValueError:               
+                try:
+                    converted_cell = float(cell.replace(',', '.'))
+                except ValueError:                    
+                    converted_cell = cell
+            converted_row.append(converted_cell)
+        converted_data.append(converted_row)
+    return converted_data
+
+def print_oee_date():
+    """
+    Retrieves data for the selected date and prints OEE.
     """
     print("OEE calculation by date")
 
-    selected_date = input("Enter the date (dd/mm/yyyy): ")
+    selected_date = get_valid_date_input("Date (dd/mm/yyyy): ")
 
-    get_data_worksheet(report, 'report')
-    get_data_worksheet(oee_factor, 'oee')
+    print_report('report','Showing report with selected date', selected_date)
 
-    filter_data(report)
-    filter_data(oee_factor)
+    report_data = get_data_worksheet('report')
+    oee_factor_data = get_data_worksheet('oee_factor')
 
-    oee_results(report,oee_factor)
+    filtered_report = filter_data(report_data, selected_date)
+    filtered_oee_factor = filter_data(oee_factor_data, selected_date)
 
+    report_int = validate_data(filtered_report)
+    oee_int = validate_data(filtered_oee_factor)
+
+
+    oee_results(report_int[0],oee_int[0])
 
 def main():
     """
@@ -276,9 +310,9 @@ def main():
         if choice == '1':
             add_new_report()
         elif choice == '2':
-            show_all_reports()
+            print_report('report', "\nShowing all reports\n")
         elif choice == '3':
-            print_OEE_date()
+            print_oee_date()
         elif choice == '4':
             print('\nThank you for using OEE Calculator\n'
                   'This software has been developed by Volnei Resena Junior.\n'
