@@ -24,12 +24,7 @@ class YesNoQuestion:
         response = input(self.question + " (yes/no): ").lower()
         if response == 'yes':
             if self.data is None:
-                print('\nThank you for using OEE Calculator\n'
-                      'This software has been developed by Volnei Resena Junior.\n'
-                      'This code can be found at'
-                      ' https://github.com/Volneirj/oee-calculator\n')
-                print("Exiting the program.")
-                raise SystemExit
+                print('No data found')
             else:
                 return self.data
         elif response == 'no':
@@ -45,14 +40,22 @@ def get_valid_date_input(prompt):
     Check if the data input is a date
     Also show the user the data format expected
     """
+    error_message = 'Data for this date already exists. Please choose a different date or delete it on the main menu.'
     while True:
         try:
             date_str = input(prompt)
             date_obj = datetime.strptime(date_str, '%d/%m/%Y')
             formatted_date = date_obj.strftime('%d/%m/%Y')
+            report = get_data_worksheet('report')
+            filtered_data = filter_data(report, formatted_date)
+            if filtered_data and filtered_data[0][0] == formatted_date:
+                raise ValueError(error_message)
             return formatted_date
-        except ValueError:
-            print("Invalid date format. Please use dd/mm/yyyy.")
+        except ValueError as e:            
+            if str(e) != error_message:
+                print("Invalid date format. Please use dd/mm/yyyy.")
+            else:
+                print(e)
 
 
 def get_valid_string_input(prompt):
@@ -74,7 +77,6 @@ def get_valid_integer_input(prompt):
     """
     Check if input is an integer
     """
-
     while True:
         value = input(prompt)
         if value.isdigit():
@@ -88,8 +90,7 @@ def get_daily_data():
     Get daily report data verifying
     in every input if it is correct
     """
-
-    print("Please enter the daily report data.")
+    print("\nPlease enter the daily report data.\n")
     daily_data = []
     date = get_valid_date_input("Date (dd/mm/yyyy): ")
     daily_data.append(date)
@@ -269,16 +270,6 @@ def filter_data(data, selected_date):
     filtered_data = [row for row in data if row[0] == selected_date]
 
     return filtered_data
-
-
-def print_filtered_data(filtered_data, selected_date):
-    """
-    Prints the filtered data in a formatted table.
-    """
-    if filtered_data:
-        print("\nData for date:", selected_date)
-    else:
-        print("No data available for the selected date.")
 
 
 def validate_data(data):
