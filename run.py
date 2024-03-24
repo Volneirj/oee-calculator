@@ -31,8 +31,8 @@ class YesNoQuestion:
     def ask_question(self):
         """
         Ask the user a yes/no question and handle the response.
-        response = input(self.question + " (yes/no): ").lower()
         """
+        response = input(self.question + " (yes/no): ").lower()
         if response == 'yes':
             if self.data is None:
                 print('No data found')
@@ -228,7 +228,7 @@ def display_menu():
     print("\nMain Menu\n")
     print("1. Add new report")
     print("2. Show all reports")
-    print("3. See OEE by date")
+    print("3. Load OEE by date")
     print("4. Exit\n")
 
 
