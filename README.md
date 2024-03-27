@@ -79,11 +79,11 @@ google drive.
 
 - Them using the auxiliar variables together with the production data is calculate the factors:
 
-1. Availability in %%:
+1. Availability in %:
     **Availability** = (operating time/production time)*100
-2. Performance in %%:
+2. Performance in %:
     **Performance** = ((total piece/operantion time)/Ideal run rate)*100
-3. Quality in %% :
+3. Quality in %:
     **Quality** = (good pieces/total pieces)*100 
 4. Overall OEE = availability * performance * quality
 
@@ -109,7 +109,7 @@ To ensure the utmost privacy and security to the data, has been implemented a so
 
 ## Google Sheets API
 
-The Google Sheets API enables developers to read, write, and manipulate Google Sheets data using code. It allows for tasks such as creating new sheets, updating existing ones, inserting and deleting rows and columns, and formatting cells.
+- The Google Sheets API enables developers to read, write, and manipulate Google Sheets data using code. It allows for tasks such as creating new sheets, updating existing ones, inserting and deleting rows and columns, and formatting cells.
 
 ![Google Sheet API](docs/readme_images/google-sheet-api.jpg)
 
@@ -137,8 +137,8 @@ The Google Sheets API enables developers to read, write, and manipulate Google S
 - **Miro** Flowchart and design thinking
 
 # Libraries
-- **googleauth** to access googledrive and googlesheet using the api
-- **gspread** Library for googlesheet manipulation
+- **googleauth** Used to provide access to the application to interact with my google sheet.
+- **gspread** Used to access google sheets document throughout the application, to access and edit data.
 - **datetime** To validate datetime input
 
 
@@ -146,7 +146,7 @@ The Google Sheets API enables developers to read, write, and manipulate Google S
 
 ### Debbugging 
 
-  - For debugging, the python code has been using `print` together with the console logs to help identify bugs, loops, and condition interactions.. 
+  - For debugging the python code has been used `print` together with the console logs to help identify bugs, loops, and condition interactions.. 
 
 ### Aplication interaction tests
 
@@ -215,7 +215,7 @@ After deployment, a batch of tests has been conducted, and the results are shown
 
 
 #### Python
-- Using the [CI Python Linter - Code institute](https://pep8ci.herokuapp.com/) inspect and validate the python bellow has a image showing the result.
+- Using the [CI Python Linter - Code institute](https://pep8ci.herokuapp.com/) inspect and validate the python code, the image bellow is showing the result.
 
 ## Before validation
 
@@ -227,17 +227,7 @@ After deployment, a batch of tests has been conducted, and the results are shown
 
 ## Deployment
 
-- **Deploying the project on Github**
-  You can deploy this website by using GitPages and following the below steps:
-
-  1. Log in to GitHub
-  2. In your Repository section, select the project repository that you want to deploy
-  3. In the menu located at the top of this section, click 'Settings'
-  4. Select 'Pages' on the left-hand menu - this is around halfway down
-  5. In the source section, select branch 'Main' and save
-  6. The page is then given a site URL which you will see above the source section, it will look like the following:
-
-![Deployment](docs/readme_images/deploy.jpg)
+## Github Forking
 
 - **Forking the GitHub Repository**
   If you want to make changes to your repository without affecting it, you can make a copy of it by 'Forking' it. This ensures your original repository remains unchanged.
@@ -258,6 +248,10 @@ After deployment, a batch of tests has been conducted, and the results are shown
   7. Press enter and your local clone will be created.
 - Live link: [GitHub Link](https://https://github.com/Volneirj/oee-calculator)
 
+## Heroku Deployment
+
+- **Creating an Application with Heroku**
+
 
 ## Credits
 
@@ -274,13 +268,8 @@ After deployment, a batch of tests has been conducted, and the results are shown
 
 3. **Code Validation:**
 
-   - [W3C Jigsaw Validator](https://jigsaw.w3.org/)
-   - [JSHint](https://jshint.com/)
+   - [CI Python Linter - Code institute](https://pep8ci.herokuapp.com/)  
 
 ### Content
 
-All content used was free material gathered from the following web sites:
-- [Freepik](https://www.freepik.com/) - Background.
-- [Pixbay](https://pixabay.com/) - Background.
-- [CoolText Graphics Generator](https://cooltext.com/) - Logo art and Dungeon Numbers.
-- [LeonardAi](https://leonardo.ai/) - Monsters.
+
