@@ -1,6 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 from datetime import datetime
+import os
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -46,6 +47,25 @@ class YesNoQuestion:
             return self.ask_question()
 
 
+def clear_screen():
+    """
+    Clear the screen when called (win/mac)
+    """
+    if os.name == 'nt':
+        _ = os.system('cls')
+    else:
+        _ = os.system('clear')
+
+
+def press_any_key_to_return():
+    """
+    Added to user decide when the want clear
+    the screen
+    """
+    input("\nPress Any key to return main menu....")
+    clear_screen()
+
+
 def get_date_input_wfilter(prompt):
     """
     Check if the data is a date,
@@ -57,6 +77,8 @@ def get_date_input_wfilter(prompt):
     while True:
         try:
             date_str = input(prompt)
+            if date_str.lower() == 'q':
+                return 'q'
             date_obj = datetime.strptime(date_str, '%d/%m/%Y')
             formatted_date = date_obj.strftime('%d/%m/%Y')
             report = get_data_worksheet('report')
@@ -79,6 +101,8 @@ def get_valid_date_input(prompt):
     while True:
         try:
             date_str = input(prompt)
+            if date_str.lower() == 'q':
+                return 'q'
             date_obj = datetime.strptime(date_str, '%d/%m/%Y')
             formatted_date = date_obj.strftime('%d/%m/%Y')
             return formatted_date
@@ -93,6 +117,8 @@ def get_valid_string_input(prompt):
     """
     while True:
         value = input(prompt)
+        if value.lower() == 'q':
+            return 'q'
         if value.replace(" ", "").isalpha() and len(value) >= 3:
             return value.upper()
         else:
@@ -107,10 +133,21 @@ def get_valid_integer_input(prompt):
     """
     while True:
         value = input(prompt)
-        if value.isdigit():
-            return int(value)
+        if value == 'q':
+            return 'q'
         else:
-            print("Invalid input. Please enter a valid integer.")
+            if value.isdigit():
+                return int(value)
+            else:
+                print("Invalid input. Please enter a valid integer.")
+
+
+def code_break(variable):
+    """
+    Break the code when user input "q"
+    """
+    if variable.lower() == 'q':
+        raise KeyboardInterrupt
 
 
 def get_daily_data():
@@ -118,36 +155,66 @@ def get_daily_data():
     Get daily report data verifying
     in every input if it is correct
     """
-    print("\nPlease enter the daily report data.\n")
-    daily_data = []
-    date = get_date_input_wfilter("Date (dd/mm/yyyy): ")
-    daily_data.append(date)
-    supervisor = get_valid_string_input("Supervisor Name: ")
-    daily_data.append(supervisor)
-    shift_length = get_valid_integer_input("Shift length (minutes): ")
-    daily_data.append(shift_length)
-    short_breaks = get_valid_integer_input("Short breaks (minutes): ")
-    daily_data.append(short_breaks)
-    meal_breaks = get_valid_integer_input("Meal breaks (minutes): ")
-    daily_data.append(meal_breaks)
-    downtime = get_valid_integer_input("Machine down time (minutes): ")
-    daily_data.append(downtime)
-    ideal_run = get_valid_integer_input("Ideal run rate (parts per minute): ")
-    daily_data.append(ideal_run)
-    total_pieces = get_valid_integer_input("Total processed pieces: ")
-    daily_data.append(total_pieces)
-    rejected_pieces = get_valid_integer_input("Total rejected pieces: ")
-    daily_data.append(rejected_pieces)
-    headers = ['Date', 'Supervisor', 'Shift Length',
-               'Short Breaks', 'Meal Break', 'Down Time',
-               'Ideal Run Rate', 'Total Pieces', 'Reject Pieces']
-    data_dict = dict(zip(headers, daily_data))
-    print(data_dict)
-    is_the_data_correct = YesNoQuestion("Are the information given correct?",
-                                        daily_data, get_daily_data)
-    is_the_data_correct.ask_question()
+    try:
+        while True:
+            print('\nPlease enter the daily report data.\n'
+                  'To return Main Menu type "q" \n')
+            daily_data = []
+            date = get_date_input_wfilter("Date (dd/mm/yyyy): ")
+            code_break(date)
+            daily_data.append(date)
 
-    return daily_data
+            supervisor = get_valid_string_input("Supervisor Name: ")
+            code_break(supervisor)
+            daily_data.append(supervisor)
+
+            shift_length = get_valid_integer_input("Shift length (minutes): ")
+            code_break(shift_length)
+            daily_data.append(shift_length)
+
+            short_breaks = get_valid_integer_input("Short breaks (minutes): ")
+            code_break(short_breaks)
+            daily_data.append(short_breaks)
+
+            meal_breaks = get_valid_integer_input("Meal breaks (minutes): ")
+            code_break(meal_breaks)
+            daily_data.append(meal_breaks)
+
+            downtime = get_valid_integer_input("Machine down time (minutes): ")
+            code_break(downtime)
+            daily_data.append(downtime)
+
+            ideal_run = get_valid_integer_input('Ideal run rate'
+                                                '(parts per minute): ')
+            code_break(ideal_run)
+            daily_data.append(ideal_run)
+
+            total_pieces = get_valid_integer_input("Total processed pieces: ")
+            code_break(total_pieces)
+            daily_data.append(total_pieces)
+
+            rejected_pieces = get_valid_integer_input('Total '
+                                                      'rejected pieces: ')
+            code_break(rejected_pieces)
+            daily_data.append(rejected_pieces)
+
+            headers = ['Date', 'Supervisor', 'Shift Length',
+                       'Short Breaks', 'Meal Break', 'Down Time',
+                       'Ideal Run Rate', 'Total Pieces', 'Reject Pieces']
+            data_dict = dict(zip(headers, daily_data))
+            print(data_dict)
+            is_the_data_correct = YesNoQuestion('Are the '
+                                                'information given correct?',
+                                                daily_data, get_daily_data)
+            is_the_data_correct.ask_question()
+
+            clear_screen()
+
+            return daily_data
+
+    except KeyboardInterrupt:
+        press_any_key_to_return()
+        return None
 
 
 def update_worksheet(data, worksheet):
@@ -188,8 +255,8 @@ def calculate_oee(variables, data):
     quality and Overal OEE based on calulated
     variables and the daily data supplied.
 
-    variables = variables result list
-    data = report list
+    variables refer to variables result list
+    data refer to report list
     """
     oee_factor = []
 
@@ -239,19 +306,25 @@ def add_new_report():
     Collect the input data, import it to googlesheets
     calculate the oee factor based on data and variables.
     """
+    clear_screen()
+
     day_report = get_daily_data()
 
-    update_worksheet(day_report, "report")
+    if day_report is not None:
+        update_worksheet(day_report, "report")
 
-    day_variables = calculate_variables(day_report)
+        day_variables = calculate_variables(day_report)
 
-    update_worksheet(day_variables, "variables")
+        update_worksheet(day_variables, "variables")
 
-    day_oee = calculate_oee(day_variables, day_report)
+        day_oee = calculate_oee(day_variables, day_report)
 
-    update_worksheet(day_oee, "oee_factor")
+        update_worksheet(day_oee, "oee_factor")
 
-    oee_results(day_report, day_oee)
+        oee_results(day_report, day_oee)
+
+    else:
+        return None
 
 
 def print_report(worksheet, header, filter_date=None):
@@ -260,6 +333,7 @@ def print_report(worksheet, header, filter_date=None):
     retrieve all data from the specified worksheet, then print it.
     Optionally, filter the data by date before printing.
     """
+    clear_screen()
     print(header)
 
     report = SHEET.worksheet(worksheet)
@@ -282,6 +356,8 @@ def print_report(worksheet, header, filter_date=None):
     for row in data[1:]:
         print("|".join(cell.ljust(width) for cell,
               width in zip(row, column_widths)))
+
+    press_any_key_to_return()
 
 
 def get_data_worksheet(worksheet):
@@ -327,23 +403,28 @@ def oee_by_date():
     """
     Retrieves data for the selected date and prints OEE.
     """
-    print("OEE calculation by date")
+    clear_screen()
+    print('\nOEE calculation by date\n'
+          'To Return to the Main Menu type "q"\n')
 
-    selected_date = get_valid_date_input("Date (dd/mm/yyyy): ")
+    selected_date = get_valid_date_input('Choose date (dd/mm/yyyy) '
+                                         'to print the report: ')
+    if selected_date != "q":
+        report_data = get_data_worksheet('report')
+        oee_factor_data = get_data_worksheet('oee_factor')
 
-    report_data = get_data_worksheet('report')
-    oee_factor_data = get_data_worksheet('oee_factor')
+        filtered_report = filter_data(report_data, selected_date)
+        filtered_oee_factor = filter_data(oee_factor_data, selected_date)
 
-    filtered_report = filter_data(report_data, selected_date)
-    filtered_oee_factor = filter_data(oee_factor_data, selected_date)
+        report_int = validate_data(filtered_report)
+        oee_int = validate_data(filtered_oee_factor)
 
-    report_int = validate_data(filtered_report)
-    oee_int = validate_data(filtered_oee_factor)
+        if report_int and oee_int:
+            oee_results(report_int[0], oee_int[0])
+        else:
+            print(f'\nNo data Available for {selected_date}')
 
-    if report_int and oee_int:
-        oee_results(report_int[0], oee_int[0])
-    else:
-        print(f'\nNo data Available for {selected_date}')
+    press_any_key_to_return()
 
 
 def main():
@@ -362,6 +443,7 @@ def main():
         elif choice == '3':
             oee_by_date()
         elif choice == '4':
+            clear_screen()
             print('\nThank you for using OEE Calculator\n'
                   'This software has been developed by Volnei Resena Junior.\n'
                   'This code can be found at'

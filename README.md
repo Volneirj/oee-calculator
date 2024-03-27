@@ -139,20 +139,26 @@ To ensure the utmost privacy and security to the data, has been implemented a so
 # Libraries
 - **googleauth** Used to provide access to the application to interact with my google sheet.
 - **gspread** Used to access google sheets document throughout the application, to access and edit data.
-- **datetime** To validate datetime input
+- **datetime** Used to validate datetime input
+- **os** Used to interact with the operation system
 
 
 ## Testing and Fixing Bugs
 
-### Debbugging 
+### Debugging 
 
-  - For debugging the python code has been used `print` together with the console logs to help identify bugs, loops, and condition interactions.. 
+  - For debugging the python code has been used `print` together with debugging tools and the console logs to help identify bugs, loops, and condition interactions.. 
+
+  **Debugging Tools**
+
+   - [CI Python Linter - Code institute](https://pep8ci.herokuapp.com/)  
+   - [OpenAI Chat](https://chat.openai.com/)
+   - [Perplexity AI](https://www.perplexity.ai/) 
+
 
 ### Aplication interaction tests
 
 After deployment, a batch of tests has been conducted, and the results are shown below.
-
-
 
 # Test Table
 
@@ -258,18 +264,5 @@ After deployment, a batch of tests has been conducted, and the results are shown
 
 1. **Base Code reference** 
 
-    - The 
-    - 
-
-2. **AI Search Engine:**
-
-   - [OpenAI Chat](https://chat.openai.com/)
-   - [Perplexity AI](https://www.perplexity.ai/)
-
-3. **Code Validation:**
-
-   - [CI Python Linter - Code institute](https://pep8ci.herokuapp.com/)  
-
-### Content
-
+   - [Code institute Love Sandwiches Walkthrough](https://learn.codeinstitute.net/)
 
