@@ -95,6 +95,25 @@ google drive.
 ![Logic Flow chart](docs/readme_images/flowchart.jpg)
 
 
+### Google Cloud
+
+- To the data management strateg, the Google Cloud robust APIs to store and manipulate data effeciently. Specifically, rely on two APIs provided by GoogleCloud:
+the Google Drive API and the Google Sheets API. These APIs empower us to seamlessly interact with data stored on Google Drive and within Google Sheets programmatically.
+To ensure the utmost privacy and security to the data, has been implemented a sophisticated approach using service accounts.
+
+## Google Drive API
+
+- The Google Drive API allows developers to interact with files and folders stored on Google Drive programmatically. It provides methods for uploading, downloading, searching, and modifying files, as well as managing permissions and metadata.
+
+## Google Sheets API
+
+The Google Sheets API enables developers to read, write, and manipulate Google Sheets data using code. It allows for tasks such as creating new sheets, updating existing ones, inserting and deleting rows and columns, and formatting cells.
+
+## Service Account
+
+- A service account is a special type of Google account that belongs to your application or a virtual machine (VM), instead of an individual user. It's typically used when the application needs to access Google Cloud services programmatically without user interaction. Service accounts are associated with cryptographic key pairs, which can be used to authenticate API requests.
+
+
 ## Technologies
 
 - **Python:** Backend Development
@@ -124,7 +143,7 @@ google drive.
 
 After all user implementations, a batch of tests has been conducted, and the results are shown below.
 
-# Main Screen
+# Test Table
 
 | **Feature**            | **Expected Results**                                              | **Testing Performed**                                       | **Result** |
 |:-----------------------:|:------------------------------------------------------------------:|:------------------------------------------------------------:|:----------:|
