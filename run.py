@@ -70,6 +70,7 @@ def get_date_input_wfilter(prompt):
             else:
                 print(e)
 
+
 def get_valid_date_input(prompt):
     """
     Check if the data input is a date
@@ -83,6 +84,7 @@ def get_valid_date_input(prompt):
             return formatted_date
         except ValueError:
             print("Invalid date format. Please use dd/mm/yyyy.")
+
 
 def get_valid_string_input(prompt):
     """
@@ -351,7 +353,7 @@ def main():
     """
     while True:
         display_menu()
-        choice = input("Please select an option from 1 to 4: ") 
+        choice = input("Please select an option from 1 to 4: ")
 
         if choice == '1':
             add_new_report()

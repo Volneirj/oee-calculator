@@ -105,13 +105,23 @@ To ensure the utmost privacy and security to the data, has been implemented a so
 
 - The Google Drive API allows developers to interact with files and folders stored on Google Drive programmatically. It provides methods for uploading, downloading, searching, and modifying files, as well as managing permissions and metadata.
 
+![Google Drive API](docs/readme_images/google-drive-api.jpg)
+
 ## Google Sheets API
 
 The Google Sheets API enables developers to read, write, and manipulate Google Sheets data using code. It allows for tasks such as creating new sheets, updating existing ones, inserting and deleting rows and columns, and formatting cells.
 
+![Google Sheet API](docs/readme_images/google-sheet-api.jpg)
+
 ## Service Account
 
 - A service account is a special type of Google account that belongs to your application or a virtual machine (VM), instead of an individual user. It's typically used when the application needs to access Google Cloud services programmatically without user interaction. Service accounts are associated with cryptographic key pairs, which can be used to authenticate API requests.
+
+![Service Account](docs/readme_images/service-account.jpg)
+
+## Secure Management of Service Accounts
+
+- In the setup, security is prioritized through the management of user service accounts via JSON files. Precautions have been taken to ensure the safety of these private keys. Specifically, the JSON file containing the service account credentials is added to the .gitignore file. This step prevents accidental commits of sensitive information to version control repositories, effectively safeguarding the private keys from unauthorized access.
 
 
 ## Technologies
@@ -122,7 +132,8 @@ The Google Sheets API enables developers to read, write, and manipulate Google S
 - **Git:** Version control.
 - **Heroku:** Cloud Deployment.
 - **Google Cloud Services** APIs to access and manipulate cloud based files
-- **GoogleDrive** Store data in a googlesheet 
+- **Google Drive** Store data in a googlesheet 
+- **Google Sheet** Data Storage
 
 # Libraries
 - **googleauth** to access googledrive and googlesheet using the api
@@ -132,86 +143,81 @@ The Google Sheets API enables developers to read, write, and manipulate Google S
 
 ## Testing and Fixing Bugs
 
-
 ### Debbugging 
 
   - For debugging, the python code has been using `print` together with the console logs to help identify bugs, loops, and condition interactions.. 
- ![Console.log](docs/readme_images/console-log.jpg)
- ![Developer Tools](docs/readme_images/devtools.jpg)
 
-### Game and Interaction Tests
+### Aplication interaction tests
 
-After all user implementations, a batch of tests has been conducted, and the results are shown below.
+After deployment, a batch of tests has been conducted, and the results are shown below.
+
+
 
 # Test Table
 
-| **Feature**            | **Expected Results**                                              | **Testing Performed**                                       | **Result** |
-|:-----------------------:|:------------------------------------------------------------------:|:------------------------------------------------------------:|:----------:|
-| **Home Page**           | Load all content without bugs                                      | Open page on computer and mobile                             | Pass       |
-| **How to Play Button**  | Open the popup                                                     | Clicked on "How to Play"                                     | Pass       |
-| **Select an available dungeon** | Enter the battle                                               | Clicked on Dungeon I                                          | Pass       |
-| **Select an unavailable dungeon** | Shows the reason it is not accessible                           | Clicked on Dungeon II, III, and IV                             | Pass       |
-| **Select dungeon when overpowered** | Shows the reason it is not accessible                       | Clicked on Dungeon I with more than 150 power                 | Pass       |
-| **Social Media Icons**  | Open a new page with social media                                  | Clicked on Instagram, Facebook, and WhatsApp links             | Pass       |
-| **Load Hero Information** | Load hero hitpoints and hero status on the top left               | Information loaded correctly                                  | Pass       |
-| **Change Background**   | Background should change back to default when the battle is over | Left the battle and observed the background change to default | Pass       |
-
-# Battle Screen - Buttons
+# Main program
 
 | **Feature**            | **Expected Results**                                              | **Testing Performed**                                       | **Result** |
 |:-----------------------:|:------------------------------------------------------------------:|:------------------------------------------------------------:|:----------:|
-| **Attack With Full HitPoints** | Attack and defend against the monster                               | Clicked on the attack button | Pass |
-| **Attack With Zero HitPoints** | Popup "You are dead"                                              | Clicked on the attack button | Pass |
-| **Attack With Zero HitPoints with Health Potion** | Popup "Game over" and suggestion to use a health potion | Clicked on the attack button | Pass |
-| **Attack With Zero HitPoints without Health Potion** | Popup "Game over"                                               | Clicked on the attack button | Pass |
-| **Use Health Potion with less Hitpoints and more than 0 potions** | Popup showing the amount of life recovered and recover the hero HP | Clicked on the health potion button | Pass |
-| **Use Health Potion with full Hitpoints** | Popup showing "You already have full hitpoints" | Clicked on the health potion button | Pass |
-| **Run with HitPoints** | Popup asking to confirm if you want to run away; if confirmed, go back to default screen | Clicked on the run button | Pass |
-| **Run without HitPoints** | Move back to the main screen, reset status, and show an interaction popup | Clicked on the run button | Pass |
+| **Run Program**           | Run program without errors                                 | Run the program                           | Pass       |
+| **Main Menu**  | Accept only numbers 1 to 4                                               | Try different type of characters and different numbers.            | Pass       |
+| **1 - Add New report** | Ask user the daily report information starting from the date        | Enter option 1 using the main menu.              | Pass       |
+| **2 - Load report** | Connect to google drive, extract data and show to the user in a table       | Enter option 2 using the main menu.              | Pass       |
+| **3 - Load OEE by date** | Connect to google drive, extract data and show oee for selected date     | Enter option 3 using the main menu.              | Pass       |
+| **4 - Exit** | Close the application and show credits   | Enter option 4 using the main menu.              | Pass       |
 
-# Battle Screen - Interactions
+
+# 1 - Add New report
 
 | **Feature**            | **Expected Results**                                              | **Testing Performed**                                       | **Result** |
 |:-----------------------:|:------------------------------------------------------------------:|:------------------------------------------------------------:|:----------:|
-| **Hitpoints Bar** | While receiving damage, it updates and changes color to green, yellow, and red depending on the amount of life | Attacked the monster | Pass |
-| **Killing a Monster** | Calls the level-up function and increases the hero's status; asks if the user wants to continue in the dungeon; if confirmed, adds status and spawns a new monster | Killed a monster and checked if rewards have been added | Pass |
-| **Hero Status Bar** | Being updated after winning a battle | Killed a monster and checked if rewards have been added | Pass |
-| **Monster Drop** | 30% chance to get a special item that boosts your status | Killed a monster until getting special rewards and checked if they have been added | Pass |
+| **Date** | Only accept the dd/mm/yyyy date format              | Tried different date format, character types.                 | Pass       |
+| **Name** | Only accept letters and minimum 3, not only blank characters |Tested different type of characters, empty spaces and 0-2 letters only.              | Pass       |
+| **Shifth Length** | Only accept integer|Tested different type of characters, empty spaces         | Pass       |
+| **Short Breaks** | Only accept integer|Tested different type of characters, empty spaces         | Pass       |
+| **Meal Breaks** | Only accept integer|Tested different type of characters, empty spaces         | Pass       |
+| **Machine Shutdown** | Only accept integer|Tested different type of characters, empty spaces         | Pass       |
+| **Ideal Run Rate** | Only accept integer|Tested different type of characters, empty spaces         | Pass       |
+| **Total Processed Pieces** | Only accept integer|Tested different type of characters, empty spaces         | Pass       |
+| **Total Rejected Pieces** | Only accept integer|Tested different type of characters, empty spaces         | Pass       |
+| **Show User all input data with Headers** | Print a dictionary with (Header: User input)|Add all requested data and check the output data       | Pass       |
+| **Ask the user if all data is correct** |If user write **yes** start to export the data |Write yes on prompt and check the result      | Pass       |
+| **Ask the user if all data is correct** |If user write **no** restart the data colection process |Write no on prompt and check the result      | Pass       |
 
+# 1 - Add New report - Data manipulation
 
+| **Feature**            | **Expected Results**                                              | **Testing Performed**                                       | **Result** |
+|:-----------------------:|:------------------------------------------------------------------:|:------------------------------------------------------------:|:----------:|
+| **Update Report Sheet** | Update worksheet **report** on google sheet located on google drive       | Check if the data has been exported to a new line on worksheet| Pass       |
+| **Calculate Auxiliar Variables** | Calculate auxiliar variables   | Print message with the data before export| Pass       |
+| **Update variables Sheet** | Update worksheet **variables**  on google sheet located on google drive  | Check if the data has been exported to a new line on worksheet| Pass |
+| **Calculate OEE** | Convert and Calculate OEE  | Print message with the data before export| Pass       |
+| **Update OEE Sheet** | Update worksheet **oee-factor** on google sheet located on google drive    | Check if the data has been exported to a new line on worksheet| Pass |
+| **Print Results** | Print a text showing the Overall OEE results      | Check if the printed data is correct and in the rigth format| Pass |
+
+# 2 - Load all reports - Data manipulation
+
+| **Feature**            | **Expected Results**                                              | **Testing Performed**                                       | **Result** |
+|:-----------------------:|:------------------------------------------------------------------:|:------------------------------------------------------------:|:----------:|
+| **Print all reports** | Load worksheet **report** on google sheet located on google drive  | Select option and verify if the data is correct and proper showed| Pass       |
+
+# 3 - Load OEE by date - Data manipulation
+
+| **Feature**            | **Expected Results**                                              | **Testing Performed**                                       | **Result** |
+|:-----------------------:|:------------------------------------------------------------------:|:------------------------------------------------------------:|:----------:|
+| **Date** | Only accept the dd/mm/yyyy date format              | Tried different date format, character types.                 | Pass       |
+| **Date Not available** |Print no date available for dd/mm/yyyy         | Tried different which is not on googlesheet          | Pass       |
+| **Show OEE** | If the date is correct, extract data and print the OEE result for the selected date| Check if the results are correct and showing in the right format| Pass       |
 
 
 ### Validator Testing
 
 
-#### HTML
-
-- Using the [Markup Validation Service](https://validator.w3.org), through the URL option has been checked all pages and the results can be found bellow. 
-
-- [HTML content](https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fvolneirj.github.io%2Fadventurers-guild%2F)
-
-#### CSS
-
-- Using the [Markup Validation Service](https://validator.w3.org), through the direct input option the CSS code has been checked looking for errors.
-
-- [CSS content](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fvolneirj.github.io%2Fadventurers-guild%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)
-
-#### JavaScript
+#### Python
 - Using the [JShint](https://jshint.com/) inspect and validate the JavaScript bellow has a image showing the result.
-
-- Observation: Has been written to include the comments /*jshint esversion: 6 */ /*jshint esversion: 8 */ at the beginning of the JavaScript code to ignore potential warnings related to mismatched versions.
-
-![JShint Results](docs/readme_images/jshint.jpg)
-
-## Accessibility
-
-- Using the lighthouse Developer Tool from google Chrome, the performance, accessibility has been enhanced, improving the images sizes to get a good performance above 90 points.
-
-![Lighthouse Performance](docs/readme_images/lighthouse.jpg)
 
 
 ## Deployment
-
 
 - **Deploying the project on Github**
   You can deploy this website by using GitPages and following the below steps:
