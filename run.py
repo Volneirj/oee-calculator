@@ -351,7 +351,7 @@ def main():
     """
     while True:
         display_menu()
-        choice = input("Please select an option: ")
+        choice = input("Please select an option from 1 to 4: ") 
 
         if choice == '1':
             add_new_report()
