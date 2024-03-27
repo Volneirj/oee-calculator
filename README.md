@@ -134,6 +134,7 @@ The Google Sheets API enables developers to read, write, and manipulate Google S
 - **Google Cloud Services** APIs to access and manipulate cloud based files
 - **Google Drive** Store data in a googlesheet 
 - **Google Sheet** Data Storage
+- **Miro** Flowchart and design thinking
 
 # Libraries
 - **googleauth** to access googledrive and googlesheet using the api
@@ -214,8 +215,15 @@ After deployment, a batch of tests has been conducted, and the results are shown
 
 
 #### Python
-- Using the [JShint](https://jshint.com/) inspect and validate the JavaScript bellow has a image showing the result.
+- Using the [CI Python Linter - Code institute](https://pep8ci.herokuapp.com/) inspect and validate the python bellow has a image showing the result.
 
+## Before validation
+
+![Python code before validation](docs/readme_images/ci-python-code.jpg)
+
+## After validation
+
+![Python code after validation](docs/readme_images/ci-python-code-noerror.jpg)
 
 ## Deployment
 
@@ -248,7 +256,7 @@ After deployment, a batch of tests has been conducted, and the results are shown
   5. Move to the folder you want clone it
   6. In the terminal type 'git clone' & then paste the link you copied in GitHub
   7. Press enter and your local clone will be created.
-- Live link: [GitHub Link](https://github.com/Volneirj/adventurers-guild)
+- Live link: [GitHub Link](https://https://github.com/Volneirj/oee-calculator)
 
 
 ## Credits
@@ -256,10 +264,8 @@ After deployment, a batch of tests has been conducted, and the results are shown
 
 1. **Base Code reference** 
 
-    - I used from the video bellow the idea how I would start the code, as it is using java, I convert the idea to java script, implementing new functions and making the game more dynamic as the example the function bellow, replacing the writing input "1", to my attackButton function which is triggered by a listener.
-    - [Java ForBegginers](https://www.youtube.com/watch?v=EpB9u4ItOYU&t=1284s&ab_channel=Codecourse)
-    ![Java Attack Code](docs/readme_images/java-attack.jpg)
-    ![Attack Button](docs/readme_images/attack-button.jpg)    
+    - The 
+    - 
 
 2. **AI Search Engine:**
 
