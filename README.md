@@ -302,5 +302,5 @@ After deployment, a batch of tests has been conducted, and the results are shown
 
 1. **Base Code reference** 
 
-   - [Code institute Love Sandwiches Walkthrough](https://learn.codeinstitute.net/)
+   - [Code institute Love Sandwiches Walkthrough](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+LS101+2021_T1/courseware/293ee9d8ff3542d3b877137ed81b9a5b/58d3e90f9a2043908c62f31e51c15deb/)
 
