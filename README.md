@@ -16,7 +16,6 @@ As part of a course project, this solution serves as an educational resource, de
 
 ### Existing Features
 
-
 #### Main Menu
 
 - The main menu show the options available for the user.
@@ -94,36 +93,6 @@ google drive.
 
 ![Logic Flow chart](docs/readme_images/flowchart.jpg)
 
-
-### Google Cloud
-
-- To the data management strateg, the Google Cloud robust APIs to store and manipulate data effeciently. Specifically, rely on two APIs provided by GoogleCloud:
-the Google Drive API and the Google Sheets API. These APIs empower us to seamlessly interact with data stored on Google Drive and within Google Sheets programmatically.
-To ensure the utmost privacy and security to the data, has been implemented a sophisticated approach using service accounts.
-
-## Google Drive API
-
-- The Google Drive API allows developers to interact with files and folders stored on Google Drive programmatically. It provides methods for uploading, downloading, searching, and modifying files, as well as managing permissions and metadata.
-
-![Google Drive API](docs/readme_images/google-drive-api.jpg)
-
-## Google Sheets API
-
-- The Google Sheets API enables developers to read, write, and manipulate Google Sheets data using code. It allows for tasks such as creating new sheets, updating existing ones, inserting and deleting rows and columns, and formatting cells.
-
-![Google Sheet API](docs/readme_images/google-sheet-api.jpg)
-
-## Service Account
-
-- A service account is a special type of Google account that belongs to your application or a virtual machine (VM), instead of an individual user. It's typically used when the application needs to access Google Cloud services programmatically without user interaction. Service accounts are associated with cryptographic key pairs, which can be used to authenticate API requests.
-
-![Service Account](docs/readme_images/service-account.jpg)
-
-## Secure Management of Service Accounts
-
-- In the setup, security is prioritized through the management of user service accounts via JSON files. Precautions have been taken to ensure the safety of these private keys. Specifically, the JSON file containing the service account credentials is added to the .gitignore file. This step prevents accidental commits of sensitive information to version control repositories, effectively safeguarding the private keys from unauthorized access.
-
-
 ## Technologies
 
 - **Python:** Backend Development
@@ -136,12 +105,39 @@ To ensure the utmost privacy and security to the data, has been implemented a so
 - **Google Sheet** Data Storage
 - **Miro** Flowchart and design thinking
 
-# Libraries
+## Libraries
 - **googleauth** Used to provide access to the application to interact with my google sheet.
 - **gspread** Used to access google sheets document throughout the application, to access and edit data.
 - **datetime** Used to validate datetime input
 - **os** Used to interact with the operation system
 
+## Google Cloud
+
+- To the data management strategy, use the Google Cloud robust APIs to store and manipulate data effeciently. Specifically, rely on two APIs provided by GoogleCloud:
+the Google Drive API and the Google Sheets API. These APIs empower us to seamlessly interact with data stored on Google Drive and within Google Sheets programmatically.
+To ensure the utmost privacy and security to the data, has been implemented a sophisticated approach using service accounts.
+
+### Google Drive API
+
+- The Google Drive API allows developers to interact with files and folders stored on Google Drive programmatically. It provides methods for uploading, downloading, searching, and modifying files, as well as managing permissions and metadata.
+
+![Google Drive API](docs/readme_images/google-drive-api.jpg)
+
+### Google Sheets API
+
+- The Google Sheets API enables developers to read, write, and manipulate Google Sheets data using code. It allows for tasks such as creating new sheets, updating existing ones, inserting and deleting rows and columns, and formatting cells.
+
+![Google Sheet API](docs/readme_images/google-sheet-api.jpg)
+
+### Service Account
+
+- A service account is a special type of Google account that belongs to your application or a virtual machine (VM), instead of an individual user. It's typically used when the application needs to access Google Cloud services programmatically without user interaction. Service accounts are associated with cryptographic key pairs, which can be used to authenticate API requests.
+
+![Service Account](docs/readme_images/service-account.jpg)
+
+### Secure Management of Service Accounts
+
+- In the setup, security is prioritized through the management of user service accounts via JSON files. Precautions have been taken to ensure the safety of these private keys. Specifically, the JSON file containing the service account credentials is added to the .gitignore file. This step prevents accidental commits of sensitive information to version control repositories, effectively safeguarding the private keys from unauthorized access.
 
 ## Testing and Fixing Bugs
 
@@ -160,9 +156,9 @@ To ensure the utmost privacy and security to the data, has been implemented a so
 
 After deployment, a batch of tests has been conducted, and the results are shown below.
 
-# Test Table
+### Test Table
 
-# Main program
+#### Main program
 
 | **Feature**            | **Expected Results**                                              | **Testing Performed**                                       | **Result** |
 |:-----------------------:|:------------------------------------------------------------------:|:------------------------------------------------------------:|:----------:|
@@ -174,7 +170,7 @@ After deployment, a batch of tests has been conducted, and the results are shown
 | **4 - Exit** | Close the application and show credits   | Enter option 4 using the main menu.              | Pass       |
 
 
-# 1 - Add New report
+#### 1 - Add New report
 
 | **Feature**            | **Expected Results**                                              | **Testing Performed**                                       | **Result** |
 |:-----------------------:|:------------------------------------------------------------------:|:------------------------------------------------------------:|:----------:|
@@ -191,7 +187,7 @@ After deployment, a batch of tests has been conducted, and the results are shown
 | **Ask the user if all data is correct** |If user write **yes** start to export the data |Write yes on prompt and check the result      | Pass       |
 | **Ask the user if all data is correct** |If user write **no** restart the data colection process |Write no on prompt and check the result      | Pass       |
 
-# 1 - Add New report - Data manipulation
+#### 1 - Add New report - Data manipulation
 
 | **Feature**            | **Expected Results**                                              | **Testing Performed**                                       | **Result** |
 |:-----------------------:|:------------------------------------------------------------------:|:------------------------------------------------------------:|:----------:|
@@ -202,13 +198,13 @@ After deployment, a batch of tests has been conducted, and the results are shown
 | **Update OEE Sheet** | Update worksheet **oee-factor** on google sheet located on google drive    | Check if the data has been exported to a new line on worksheet| Pass |
 | **Print Results** | Print a text showing the Overall OEE results      | Check if the printed data is correct and in the rigth format| Pass |
 
-# 2 - Load all reports - Data manipulation
+#### 2 - Load all reports - Data manipulation
 
 | **Feature**            | **Expected Results**                                              | **Testing Performed**                                       | **Result** |
 |:-----------------------:|:------------------------------------------------------------------:|:------------------------------------------------------------:|:----------:|
 | **Print all reports** | Load worksheet **report** on google sheet located on google drive  | Select option and verify if the data is correct and proper showed| Pass       |
 
-# 3 - Load OEE by date - Data manipulation
+#### 3 - Load OEE by date - Data manipulation
 
 | **Feature**            | **Expected Results**                                              | **Testing Performed**                                       | **Result** |
 |:-----------------------:|:------------------------------------------------------------------:|:------------------------------------------------------------:|:----------:|
@@ -219,21 +215,20 @@ After deployment, a batch of tests has been conducted, and the results are shown
 
 ### Validator Testing
 
-
 #### Python
 - Using the [CI Python Linter - Code institute](https://pep8ci.herokuapp.com/) inspect and validate the python code, the image bellow is showing the result.
 
-## Before validation
+#### Before validation
 
 ![Python code before validation](docs/readme_images/ci-python-code.jpg)
 
-## After validation
+#### After validation
 
 ![Python code after validation](docs/readme_images/ci-python-code-noerror.jpg)
 
 ## Deployment
 
-## Github Forking
+### Github Forking
 
 - **Forking the GitHub Repository**
   If you want to make changes to your repository without affecting it, you can make a copy of it by 'Forking' it. This ensures your original repository remains unchanged.
@@ -254,7 +249,7 @@ After deployment, a batch of tests has been conducted, and the results are shown
   7. Press enter and your local clone will be created.
 - Live link: [GitHub Link](https://https://github.com/Volneirj/oee-calculator)
 
-## Heroku Deployment
+### Heroku Deployment
 
 - **Creating an Application with Heroku**
 
