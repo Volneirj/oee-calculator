@@ -174,15 +174,15 @@ After deployment, a batch of tests has been conducted, and the results are shown
 
 | **Feature**            | **Expected Results**                                              | **Testing Performed**                                       | **Result** |
 |:-----------------------:|:------------------------------------------------------------------:|:------------------------------------------------------------:|:----------:|
-| **Date** | Only accept the dd/mm/yyyy date format              | Tried different date format, character types.                 | Pass       |
-| **Name** | Only accept letters and minimum 3, not only blank characters |Tested different type of characters, empty spaces and 0-2 letters only.              | Pass       |
-| **Shifth Length** | Only accept integer|Tested different type of characters, empty spaces         | Pass       |
-| **Short Breaks** | Only accept integer|Tested different type of characters, empty spaces         | Pass       |
-| **Meal Breaks** | Only accept integer|Tested different type of characters, empty spaces         | Pass       |
-| **Machine Shutdown** | Only accept integer|Tested different type of characters, empty spaces         | Pass       |
-| **Ideal Run Rate** | Only accept integer|Tested different type of characters, empty spaces         | Pass       |
-| **Total Processed Pieces** | Only accept integer|Tested different type of characters, empty spaces         | Pass       |
-| **Total Rejected Pieces** | Only accept integer|Tested different type of characters, empty spaces         | Pass       |
+| **Date** | Only accept the dd/mm/yyyy date format              | Tried different date format, character types, check return "q".                | Pass       |
+| **Name** | Only accept letters and minimum 3, not only blank characters |Tested different type of characters, empty spaces and 0-2 letters only, check return "q".                | Pass       |
+| **Shifth Length** | Only accept integer|Tested different type of characters, empty spaces, check return "q".            | Pass       |
+| **Short Breaks** | Only accept integer|Tested different type of characters, empty spaces, check return "q".         | Pass       |
+| **Meal Breaks** | Only accept integer|Tested different type of characters, empty spaces, check return "q".            | Pass       |
+| **Machine Shutdown** | Only accept integer|Tested different type of characters, empty spaces, check return "q".            | Pass       |
+| **Ideal Run Rate** | Only accept integer|Tested different type of characters, empty spaces, check return "q".           | Pass       |
+| **Total Processed Pieces** | Only accept integer|Tested different type of characters, empty spaces, check return "q".           | Pass       |
+| **Total Rejected Pieces** | Only accept integer|Tested different type of characters, empty spaces, check return "q".           | Pass       |
 | **Show User all input data with Headers** | Print a dictionary with (Header: User input)|Add all requested data and check the output data       | Pass       |
 | **Ask the user if all data is correct** |If user write **yes** start to export the data |Write yes on prompt and check the result      | Pass       |
 | **Ask the user if all data is correct** |If user write **no** restart the data colection process |Write no on prompt and check the result      | Pass       |
@@ -208,7 +208,7 @@ After deployment, a batch of tests has been conducted, and the results are shown
 
 | **Feature**            | **Expected Results**                                              | **Testing Performed**                                       | **Result** |
 |:-----------------------:|:------------------------------------------------------------------:|:------------------------------------------------------------:|:----------:|
-| **Date** | Only accept the dd/mm/yyyy date format              | Tried different date format, character types.                 | Pass       |
+| **Date** | Only accept the dd/mm/yyyy date format              | Tried different date format, character types, check return "q".                   | Pass       |
 | **Date Not available** |Print no date available for dd/mm/yyyy         | Tried different which is not on googlesheet          | Pass       |
 | **Show OEE** | If the date is correct, extract data and print the OEE result for the selected date| Check if the results are correct and showing in the right format| Pass       |
 
