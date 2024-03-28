@@ -251,7 +251,50 @@ After deployment, a batch of tests has been conducted, and the results are shown
 
 ### Heroku Deployment
 
+- **Creating Requirements.txt**
+- To heroku be able to install the required dependencies is necessary to create the file where will be listed what is needed to run the project.
+
+1. Create a file requirements.txt.
+2. Run the command: pip3 freeze >requirements.txt.
+3. Check if the file has been updated like the image bellow.
+
+![Requirements.txt](docs/readme_images/requirements.jpg)
+
 - **Creating an Application with Heroku**
+- To be able to  deploy and run the application on heroku plataform, is necessary follow a few steps:
+
+1. Login or create an account on Heroku website.
+2. Click on create a new app.
+
+![New app](docs/readme_images/create-new-app.jpg)
+
+3. After create the new app, you need to configure the settings.
+4. The first setting which need to be done is add your CREDS.json info to the plataform so it will be able to access the googlecloud service account.
+
+![Settings CREDS](docs/readme_images/creds.jpg)
+
+5. Add the Buildpacks necessary to run the application, in this case python and nodejs in this sequence.
+
+![Buildpacks](docs/readme_images/buildpacks.jpg)
+
+6. After done the settings we move to the deploy tab where we will configure the deployment setup.
+7. Connect your Github.
+8. Select your repository on github.
+9. Connect to the repository.
+
+![Github](docs/readme_images/github.jpg)
+
+10. After all setting above been done you can select to deploy automatic or manual.
+
+![Deploy](docs/readme_images/deploy.jpg)
+
+11. After press to deploy your project if all settings are working you should see it building the application.
+
+![Project being Deployed](docs/readme_images/deployed.jpg)
+
+12. After all steps of deployment will show a button View, where you can click to open a new tab with the application.
+
+![Deploy done](docs/readme_images/done.jpg)
 
 
 ## Credits
