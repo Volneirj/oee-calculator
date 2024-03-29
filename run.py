@@ -146,7 +146,7 @@ def code_break(variable):
     """
     Break the code when user input "q"
     """
-    if variable.lower() == 'q':
+    if variable == 'q':
         raise KeyboardInterrupt
 
 
