@@ -94,49 +94,50 @@ google drive.
 
 ## Technologies
 
-    - **Python:** Backend Development
-    - **Visual Studio Code:** Local IDE.
-    - **GitHub:** Source code hosting and deployment.
-    - **Git:** Version control.
-    - **Heroku:** Cloud Deployment.
-    - **Google Cloud Services** APIs to access and manipulate cloud based files
-    - **Google Drive** Store data in a googlesheet 
-    - **Google Sheet** Data Storage
-    - **Miro** Flowchart and design thinking
+- **Python:** Backend Development
+- **Visual Studio Code:** Local IDE.
+- **GitHub:** Source code hosting and deployment.
+- **Git:** Version control.
+- **Heroku:** Cloud Deployment.
+- **Google Cloud Services** APIs to access and manipulate cloud based files
+- **Google Drive** Store data in a googlesheet 
+- **Google Sheet** Data Storage
+- **Miro** Flowchart and design thinking
 
 ## Libraries
-    - **googleauth** Used to provide access to the application to interact with my google sheet.
-    - **gspread** Used to access google sheets document throughout the application, to access and edit data.
-    - **datetime** Used to validate datetime input
-    - **os** Used to interact with the operation system
+
+- **googleauth** Used to provide access to the application to interact with my google sheet.
+- **gspread** Used to access google sheets document throughout the application, to access and edit data.
+- **datetime** Used to validate datetime input
+- **os** Used to interact with the operation system
 
 ## Google Cloud
 
-    - To the data management strategy, use the Google Cloud robust APIs to store and manipulate data effeciently. Specifically, rely on two APIs provided by GoogleCloud:
+- To the data management strategy, use the Google Cloud robust APIs to store and manipulate data effeciently. Specifically, rely on two APIs provided by GoogleCloud:
     the Google Drive API and the Google Sheets API. These APIs empower us to seamlessly interact with data stored on Google Drive and within Google Sheets programmatically.
     To ensure the utmost privacy and security to the data, has been implemented a sophisticated approach using service accounts.
 
 ### Google Drive API
 
-    - The Google Drive API allows developers to interact with files and folders stored on Google Drive programmatically. It provides methods for uploading, downloading, searching, and modifying files, as well as managing permissions and metadata.
+- The Google Drive API allows developers to interact with files and folders stored on Google Drive programmatically. It provides methods for uploading, downloading, searching, and modifying files, as well as managing permissions and metadata.
 
 ![Google Drive API](docs/readme_images/google-drive-api.jpg)
 
 ### Google Sheets API
 
-    - The Google Sheets API enables developers to read, write, and manipulate Google Sheets data using code. It allows for tasks such as creating new sheets, updating existing ones, inserting and deleting rows and columns, and formatting cells.
+- The Google Sheets API enables developers to read, write, and manipulate Google Sheets data using code. It allows for tasks such as creating new sheets, updating existing ones, inserting and deleting rows and columns, and formatting cells.
 
 ![Google Sheet API](docs/readme_images/google-sheet-api.jpg)
 
 ### Service Account
 
-    - A service account is a special type of Google account that belongs to your application or a virtual machine (VM), instead of an individual user. It's typically used when the application needs to access Google Cloud services programmatically without user interaction. Service accounts are associated with cryptographic key pairs, which can be used to authenticate API requests.
+- A service account is a special type of Google account that belongs to your application or a virtual machine (VM), instead of an individual user. It's typically used when the application needs to access Google Cloud services programmatically without user interaction. Service accounts are associated with cryptographic key pairs, which can be used to authenticate API requests.
 
 ![Service Account](docs/readme_images/service-account.jpg)
 
 ### Secure Management of Service Accounts
 
-    - In the setup, security is prioritized through the management of user service accounts via JSON files. Precautions have been taken to ensure the safety of these private keys. Specifically, the JSON file containing the service account credentials is added to the .gitignore file. This step prevents accidental commits of sensitive information to version control repositories, effectively safeguarding the private keys from unauthorized access.
+- In the setup, security is prioritized through the management of user service accounts via JSON files. Precautions have been taken to ensure the safety of these private keys. Specifically, the JSON file containing the service account credentials is added to the .gitignore file. This step prevents accidental commits of sensitive information to version control repositories, effectively safeguarding the private keys from unauthorized access.
 
 ## Testing and Fixing Bugs
 
@@ -267,31 +268,31 @@ After deployment, a batch of tests has been conducted, and the results are shown
 
 ![New app](docs/readme_images/create-new-app.jpg)
 
-    3. After create the new app, you need to configure the settings.
-    4. The first setting which need to be done is add your CREDS.json info to the plataform so it will be able to access the googlecloud service account.
+3. After create the new app, you need to configure the settings.
+4. The first setting which need to be done is add your CREDS.json info to the plataform so it will be able to access the googlecloud service account.
 
 ![Settings CREDS](docs/readme_images/creds.jpg)
 
-    5. Add the Buildpacks necessary to run the application, in this case python and nodejs in this sequence.
+5. Add the Buildpacks necessary to run the application, in this case python and nodejs in this sequence.
 
 ![Buildpacks](docs/readme_images/buildpacks.jpg)
 
-    6. After done the settings we move to the deploy tab where we will configure the deployment setup.
-    7. Connect your Github.
-    8. Select your repository on github.
-    9. Connect to the repository.
+6. After done the settings we move to the deploy tab where we will configure the deployment setup.
+7. Connect your Github.
+8. Select your repository on github.
+9. Connect to the repository.
 
 ![Github](docs/readme_images/github.jpg)
 
-    10. After all setting above been done you can select to deploy automatic or manual.
+10. After all setting above been done you can select to deploy automatic or manual.
 
 ![Deploy](docs/readme_images/deploy.jpg)
 
-    11. After press to deploy your project if all settings are working you should see it building the application.
+11. After press to deploy your project if all settings are working you should see it building the application.
 
 ![Project being Deployed](docs/readme_images/deployed.jpg)
 
-    12. After all steps of deployment will show a button View, where you can click to open a new tab with the application.
+12. After all steps of deployment will show a button View, where you can click to open a new tab with the application.
 
 ![Deploy done](docs/readme_images/done.jpg)
 
