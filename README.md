@@ -9,7 +9,6 @@ with this information calculate the OEE factor where will identify if your proce
 
 ## Project Overview
 
-
 ### Purpose:
 
 As part of a course project, this solution serves as an educational resource, demonstrating the application of python development skills to create some kind application or solution. Through the calculator, we aim to explore GoogleCloud API/GoogleSheets/Python/ features, creating an application with interact with the user and cloud services.
@@ -60,31 +59,31 @@ google drive.
 
 - The data needed to calculate the OEE are:
 
-1. Shift length in minutes - Ex. 480 minutes (8 hours)
-2. Short and long break in minutes - Ex. 30 minutes (Lunch break)
-3. Down time in minutes - Ex. 45 minutes (Machine Stopped work by overheating)
-4. Ideal run rate in unit/parts per minute - Ex. 60 units (The expectation is assembly 60 box per minute)
-5. Total parts done per shift in unit - Ex. 19000 units (Box assembled per day shifth length)
-6. Rejected parts per shift in units - Ex. 500  (500 boxes were damaged so discarted)
+    1. Shift length in minutes - Ex. 480 minutes (8 hours)
+    2. Short and long break in minutes - Ex. 30 minutes (Lunch break)
+    3. Down time in minutes - Ex. 45 minutes (Machine Stopped work by overheating)
+    4. Ideal run rate in unit/parts per minute - Ex. 60 units (The expectation is assembly 60 box per minute)
+    5. Total parts done per shift in unit - Ex. 19000 units (Box assembled per day shifth length)
+    6. Rejected parts per shift in units - Ex. 500  (500 boxes were damaged so discarted)
 
 - With this information is necessary to calculate the auxiliar variables which are:
 
-1. Planned Production Time in minutes result from: 
-    **Planned production time** = Shift Length - Breaks 
-2. Operation time in minutes result from:
-    **Operation time** = planned production time - down time 
-3. Good pieces in unit result from:
-    **Good pieces** = total pieces - rejected pieces
+    1. Planned Production Time in minutes result from: 
+        **Planned production time** = Shift Length - Breaks 
+    2. Operation time in minutes result from:
+        **Operation time** = planned production time - down time 
+    3. Good pieces in unit result from:
+        **Good pieces** = total pieces - rejected pieces
 
 - Them using the auxiliar variables together with the production data is calculate the factors:
 
-1. Availability in %:
-    **Availability** = (operating time/production time)*100
-2. Performance in %:
-    **Performance** = ((total piece/operantion time)/Ideal run rate)*100
-3. Quality in %:
-    **Quality** = (good pieces/total pieces)*100 
-4. Overall OEE = availability * performance * quality
+    1. Availability in %:
+        **Availability** = (operating time/production time)*100
+    2. Performance in %:
+        **Performance** = ((total piece/operantion time)/Ideal run rate)*100
+    3. Quality in %:
+        **Quality** = (good pieces/total pieces)*100 
+    4. Overall OEE = availability * performance * quality
 
 
 ### Flowchart
@@ -95,49 +94,49 @@ google drive.
 
 ## Technologies
 
-- **Python:** Backend Development
-- **Visual Studio Code:** Local IDE.
-- **GitHub:** Source code hosting and deployment.
-- **Git:** Version control.
-- **Heroku:** Cloud Deployment.
-- **Google Cloud Services** APIs to access and manipulate cloud based files
-- **Google Drive** Store data in a googlesheet 
-- **Google Sheet** Data Storage
-- **Miro** Flowchart and design thinking
+    - **Python:** Backend Development
+    - **Visual Studio Code:** Local IDE.
+    - **GitHub:** Source code hosting and deployment.
+    - **Git:** Version control.
+    - **Heroku:** Cloud Deployment.
+    - **Google Cloud Services** APIs to access and manipulate cloud based files
+    - **Google Drive** Store data in a googlesheet 
+    - **Google Sheet** Data Storage
+    - **Miro** Flowchart and design thinking
 
 ## Libraries
-- **googleauth** Used to provide access to the application to interact with my google sheet.
-- **gspread** Used to access google sheets document throughout the application, to access and edit data.
-- **datetime** Used to validate datetime input
-- **os** Used to interact with the operation system
+    - **googleauth** Used to provide access to the application to interact with my google sheet.
+    - **gspread** Used to access google sheets document throughout the application, to access and edit data.
+    - **datetime** Used to validate datetime input
+    - **os** Used to interact with the operation system
 
 ## Google Cloud
 
-- To the data management strategy, use the Google Cloud robust APIs to store and manipulate data effeciently. Specifically, rely on two APIs provided by GoogleCloud:
-the Google Drive API and the Google Sheets API. These APIs empower us to seamlessly interact with data stored on Google Drive and within Google Sheets programmatically.
-To ensure the utmost privacy and security to the data, has been implemented a sophisticated approach using service accounts.
+    - To the data management strategy, use the Google Cloud robust APIs to store and manipulate data effeciently. Specifically, rely on two APIs provided by GoogleCloud:
+    the Google Drive API and the Google Sheets API. These APIs empower us to seamlessly interact with data stored on Google Drive and within Google Sheets programmatically.
+    To ensure the utmost privacy and security to the data, has been implemented a sophisticated approach using service accounts.
 
 ### Google Drive API
 
-- The Google Drive API allows developers to interact with files and folders stored on Google Drive programmatically. It provides methods for uploading, downloading, searching, and modifying files, as well as managing permissions and metadata.
+    - The Google Drive API allows developers to interact with files and folders stored on Google Drive programmatically. It provides methods for uploading, downloading, searching, and modifying files, as well as managing permissions and metadata.
 
 ![Google Drive API](docs/readme_images/google-drive-api.jpg)
 
 ### Google Sheets API
 
-- The Google Sheets API enables developers to read, write, and manipulate Google Sheets data using code. It allows for tasks such as creating new sheets, updating existing ones, inserting and deleting rows and columns, and formatting cells.
+    - The Google Sheets API enables developers to read, write, and manipulate Google Sheets data using code. It allows for tasks such as creating new sheets, updating existing ones, inserting and deleting rows and columns, and formatting cells.
 
 ![Google Sheet API](docs/readme_images/google-sheet-api.jpg)
 
 ### Service Account
 
-- A service account is a special type of Google account that belongs to your application or a virtual machine (VM), instead of an individual user. It's typically used when the application needs to access Google Cloud services programmatically without user interaction. Service accounts are associated with cryptographic key pairs, which can be used to authenticate API requests.
+    - A service account is a special type of Google account that belongs to your application or a virtual machine (VM), instead of an individual user. It's typically used when the application needs to access Google Cloud services programmatically without user interaction. Service accounts are associated with cryptographic key pairs, which can be used to authenticate API requests.
 
 ![Service Account](docs/readme_images/service-account.jpg)
 
 ### Secure Management of Service Accounts
 
-- In the setup, security is prioritized through the management of user service accounts via JSON files. Precautions have been taken to ensure the safety of these private keys. Specifically, the JSON file containing the service account credentials is added to the .gitignore file. This step prevents accidental commits of sensitive information to version control repositories, effectively safeguarding the private keys from unauthorized access.
+    - In the setup, security is prioritized through the management of user service accounts via JSON files. Precautions have been taken to ensure the safety of these private keys. Specifically, the JSON file containing the service account credentials is added to the .gitignore file. This step prevents accidental commits of sensitive information to version control repositories, effectively safeguarding the private keys from unauthorized access.
 
 ## Testing and Fixing Bugs
 
@@ -168,7 +167,6 @@ After deployment, a batch of tests has been conducted, and the results are shown
 | **2 - Load report** | Connect to google drive, extract data and show to the user in a table       | Enter option 2 using the main menu.              | Pass       |
 | **3 - Load OEE by date** | Connect to google drive, extract data and show oee for selected date     | Enter option 3 using the main menu.              | Pass       |
 | **4 - Exit** | Close the application and show credits   | Enter option 4 using the main menu.              | Pass       |
-
 
 #### 1 - Add New report
 
@@ -216,6 +214,7 @@ After deployment, a batch of tests has been conducted, and the results are shown
 ### Validator Testing
 
 #### Python
+
 - Using the [CI Python Linter - Code institute](https://pep8ci.herokuapp.com/) inspect and validate the python code, the image bellow is showing the result.
 
 #### Before validation
@@ -231,14 +230,14 @@ After deployment, a batch of tests has been conducted, and the results are shown
 ### Github Forking
 
 - **Forking the GitHub Repository**
-  If you want to make changes to your repository without affecting it, you can make a copy of it by 'Forking' it. This ensures your original repository remains unchanged.
+  - If you want to make changes to your repository without affecting it, you can make a copy of it by 'Forking' it. This ensures your original repository remains unchanged.
 
   1. Find the relevant GitHub repository
   2. In the top right corner of the page, click the Fork button (under your account)
   3. Your repository has now been 'Forked' and you have a copy to work on
 
 - **Cloning the GitHub Repository**
-  Cloning your repository will allow you to download a local version of the repository to be worked on. Cloning can also be a great way to backup your work.
+  - Cloning your repository will allow you to download a local version of the repository to be worked on. Cloning can also be a great way to backup your work.
 
   1. Find the relevant GitHub repository
   2. Press the arrow on the Code button
@@ -252,55 +251,54 @@ After deployment, a batch of tests has been conducted, and the results are shown
 ### Heroku Deployment
 
 - **Creating Requirements.txt**
-- To heroku be able to install the required dependencies is necessary to create the file where will be listed what is needed to run the project.
+    - To heroku be able to install the required dependencies is necessary to create the file where will be listed what is needed to run the project.
 
-1. Create a file requirements.txt.
-2. Run the command: pip3 freeze >requirements.txt.
-3. Check if the file has been updated like the image bellow.
+    1. Create a file requirements.txt.
+    2. Run the command: pip3 freeze >requirements.txt.
+    3. Check if the file has been updated like the image bellow.
 
 ![Requirements.txt](docs/readme_images/requirements.jpg)
 
 - **Creating an Application with Heroku**
-- To be able to  deploy and run the application on heroku plataform, is necessary follow a few steps:
+    - To be able to  deploy and run the application on heroku plataform, is necessary follow a few steps:
 
-1. Login or create an account on Heroku website.
-2. Click on create a new app.
+    1. Login or create an account on Heroku website.
+    2. Click on create a new app.
 
 ![New app](docs/readme_images/create-new-app.jpg)
 
-3. After create the new app, you need to configure the settings.
-4. The first setting which need to be done is add your CREDS.json info to the plataform so it will be able to access the googlecloud service account.
+    3. After create the new app, you need to configure the settings.
+    4. The first setting which need to be done is add your CREDS.json info to the plataform so it will be able to access the googlecloud service account.
 
 ![Settings CREDS](docs/readme_images/creds.jpg)
 
-5. Add the Buildpacks necessary to run the application, in this case python and nodejs in this sequence.
+    5. Add the Buildpacks necessary to run the application, in this case python and nodejs in this sequence.
 
 ![Buildpacks](docs/readme_images/buildpacks.jpg)
 
-6. After done the settings we move to the deploy tab where we will configure the deployment setup.
-7. Connect your Github.
-8. Select your repository on github.
-9. Connect to the repository.
+    6. After done the settings we move to the deploy tab where we will configure the deployment setup.
+    7. Connect your Github.
+    8. Select your repository on github.
+    9. Connect to the repository.
 
 ![Github](docs/readme_images/github.jpg)
 
-10. After all setting above been done you can select to deploy automatic or manual.
+    10. After all setting above been done you can select to deploy automatic or manual.
 
 ![Deploy](docs/readme_images/deploy.jpg)
 
-11. After press to deploy your project if all settings are working you should see it building the application.
+    11. After press to deploy your project if all settings are working you should see it building the application.
 
 ![Project being Deployed](docs/readme_images/deployed.jpg)
 
-12. After all steps of deployment will show a button View, where you can click to open a new tab with the application.
+    12. After all steps of deployment will show a button View, where you can click to open a new tab with the application.
 
 ![Deploy done](docs/readme_images/done.jpg)
 
 
 ## Credits
 
-
-1. **Base Code reference** 
+**Base Code reference** 
 
    - [Code institute Love Sandwiches Walkthrough](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+LS101+2021_T1/courseware/293ee9d8ff3542d3b877137ed81b9a5b/58d3e90f9a2043908c62f31e51c15deb/)
 
