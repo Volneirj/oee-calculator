@@ -321,7 +321,11 @@ def add_new_report():
 
         update_worksheet(day_oee, "oee_factor")
 
+        clear_screen()
+
         oee_results(day_report, day_oee)
+        
+        press_any_key_to_return()
 
     else:
         return None
