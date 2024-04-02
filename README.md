@@ -68,22 +68,30 @@ google drive.
 
 - With this information is necessary to calculate the auxiliar variables which are:
 
-    1. Planned Production Time in minutes result from: 
+    1. Planned Production Time in minutes result from:
+
         **Planned production time** = Shift Length - Breaks 
     2. Operation time in minutes result from:
+
         **Operation time** = planned production time - down time 
     3. Good pieces in unit result from:
+
         **Good pieces** = total pieces - rejected pieces
 
 - Them using the auxiliar variables together with the production data is calculate the factors:
 
-    1. Availability in %:
+    1. Availability in %:   
+
         **Availability** = (operating time/production time)*100
     2. Performance in %:
+
         **Performance** = ((total piece/operantion time)/Ideal run rate)*100
     3. Quality in %:
+
         **Quality** = (good pieces/total pieces)*100 
-    4. Overall OEE = availability * performance * quality
+    4. Overal Equipment Effectivenss in %:
+
+        **OEE** availability * performance * quality
 
 
 ### Flowchart
