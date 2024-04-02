@@ -324,7 +324,7 @@ def add_new_report():
         clear_screen()
 
         oee_results(day_report, day_oee)
-        
+
         press_any_key_to_return()
 
     else:
