@@ -145,6 +145,8 @@ def get_valid_integer_input(prompt):
 def code_break(variable):
     """
     Break the code when user input "q"
+
+    variable refer to input alocated in a variable
     """
     if variable == 'q':
         raise KeyboardInterrupt
@@ -220,6 +222,9 @@ def get_daily_data():
 def update_worksheet(data, worksheet):
     """
     Update worksheet, add new row with the report data provided
+
+    data refer to sheet list of data.
+    worksheet refer to sheet name
     """
     print(f"Updating {worksheet} worksheet...\n")
     sheet = SHEET.worksheet(worksheet)
@@ -231,6 +236,8 @@ def calculate_variables(data):
     """
     Calculate the variables planned production time,
     operating time and good pieces based on daily data.
+
+    data refer to sheet list of data.
     """
     variables = []
 
@@ -255,8 +262,8 @@ def calculate_oee(variables, data):
     quality and Overal OEE based on calulated
     variables and the daily data supplied.
 
-    variables refer to variables result list
-    data refer to report list
+    variables refer to sheet list of data from variables.
+    data refer to sheet list of data from daily report.
     """
     oee_factor = []
 
@@ -281,6 +288,9 @@ def calculate_oee(variables, data):
 def oee_results(report, oee_factor):
     """
     Print daily results based on daily reports and oee calculated
+
+    report refer to the list of data from report sheet
+    oee_factor refer to the list of data from oee sheet
     """
     print(f'\nThe production from {report[0]} with the supervision of '
           f'{report[1]} reached:\n\nAvailability:'
@@ -336,6 +346,10 @@ def print_report(worksheet, header, filter_date=None):
     Using the API, connect to the Google Sheet and
     retrieve all data from the specified worksheet, then print it.
     Optionally, filter the data by date before printing.
+
+    worksheet refer to sheet name
+    header refer to page title
+    filter_date refer to use or not of the date filter
     """
     clear_screen()
     print(header)
@@ -367,6 +381,8 @@ def print_report(worksheet, header, filter_date=None):
 def get_data_worksheet(worksheet):
     """
     Fetches data from the specified worksheet in Google Sheets.
+
+    worksheet refer to sheet name.
     """
     data = SHEET.worksheet(worksheet)
 
@@ -376,6 +392,8 @@ def get_data_worksheet(worksheet):
 def filter_data(data, selected_date):
     """
     Filters the data based on the selected date.
+
+    data refer to sheet list of data.
     """
     filtered_data = [row for row in data if row[0] == selected_date]
 
@@ -385,6 +403,8 @@ def filter_data(data, selected_date):
 def validate_data(data):
     """
     Converts numeric strings in the data list to integers or floats.
+
+    data refer to sheet list of data.
     """
     converted_data = []
     for row in data:
